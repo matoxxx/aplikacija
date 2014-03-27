@@ -1,9 +1,8 @@
 #BetAFriend application
 
 ##Members:
-
-*Blaž Artač     artac.blaz@gmail.com  63120181
-*Matej Hočevar  mh3500@student.uni-lj.si   
+* **Blaž Artač**     artac.blaz@gmail.com  63120181
+* **Matej Hočevar**  mh3500@student.uni-lj.si   
 
 ##Description:
 
