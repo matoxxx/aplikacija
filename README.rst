@@ -29,6 +29,6 @@ Installation
 
 3. Run::
 
-   npm start
+    npm start
 
-   and open http://localhost:8000/.
+   and open http://localhost:8000/app
