@@ -1,0 +1,41 @@
+[
+    {
+        "betID": 0,
+        "betHolder": [
+            {
+                "userID": 0
+            }
+        ],
+        "betVersus": [
+            {
+                "userID": 0
+            }
+        ]
+    },
+    {
+        "betID": 1,
+        "betHolder": [
+            {
+                "userID": 0
+            }
+        ],
+        "betVersus": [
+            {
+                "userID": 0
+            }
+        ]
+    },
+    {
+        "betID": 2,
+        "betHolder": [
+            {
+                "userID": 0
+            }
+        ],
+        "betVersus": [
+            {
+                "userID": 0
+            }
+        ]
+    }
+]
