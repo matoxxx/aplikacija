@@ -1,0 +1,44 @@
+[
+    {
+        "id": 0,
+        "name": "Krog",
+        "description": "Minim dolore laboris quis velit dolor. Minim ullamco non pariatur velit consequat aute ex veniam do in laborum est. Laboris tempor Lorem voluptate deserunt incididunt elit amet proident commodo cillum veniam fugiat laboris.\r\n",
+        "icon": "http://placehold.it/32x32"
+    },
+    {
+        "id": 1,
+        "name": "Vantage",
+        "description": "Sint amet commodo in aliqua dolore. Ad dolore veniam laborum fugiat ea et deserunt irure labore commodo. Labore adipisicing minim dolor duis anim. Amet dolor est dolor sit sint proident est id minim adipisicing duis.\r\n",
+        "icon": "http://placehold.it/32x32"
+    },
+    {
+        "id": 2,
+        "name": "Flotonic",
+        "description": "Eiusmod laboris ut excepteur minim magna veniam dolore aliqua veniam esse quis. Labore officia eiusmod reprehenderit id do eu est irure esse id ut do minim labore. Duis cupidatat consectetur laborum veniam voluptate ad magna ullamco commodo aliqua eiusmod nostrud amet labore. Dolor mollit officia deserunt fugiat do nisi dolore consectetur veniam. Aliqua sunt sunt reprehenderit voluptate irure.\r\n",
+        "icon": "http://placehold.it/32x32"
+    },
+    {
+        "id": 3,
+        "name": "Eventage",
+        "description": "Ullamco eu ullamco occaecat eiusmod sint. Proident adipisicing dolore anim pariatur incididunt nulla enim. Tempor laborum duis aute dolor esse amet id consequat ullamco. Officia ea laborum labore adipisicing pariatur cupidatat consequat officia minim duis do Lorem duis fugiat.\r\n",
+        "icon": "http://placehold.it/32x32"
+    },
+    {
+        "id": 4,
+        "name": "Fitcore",
+        "description": "Do fugiat commodo magna culpa ut. Mollit sint excepteur nulla proident dolore veniam voluptate eu magna quis minim. Cupidatat aliquip veniam deserunt reprehenderit ut eu voluptate. Esse enim aliquip velit nulla esse et ex enim sint magna adipisicing tempor. Reprehenderit pariatur aliqua consequat enim sint incididunt irure labore ex reprehenderit ex qui fugiat. Magna in esse qui fugiat amet dolore commodo quis enim. Reprehenderit deserunt nisi culpa officia quis magna consectetur esse.\r\n",
+        "icon": "http://placehold.it/32x32"
+    },
+    {
+        "id": 5,
+        "name": "Geekol",
+        "description": "Reprehenderit consectetur sit sint nulla in minim ut. Lorem nostrud eiusmod occaecat elit nisi tempor cupidatat mollit eu quis officia officia. Officia eu ea veniam duis tempor mollit. Excepteur ad ex do cupidatat ullamco qui exercitation amet incididunt irure esse dolore enim nulla. Labore quis aliqua aliquip in aliqua elit incididunt. Aliqua cupidatat aliquip in dolor ad ad labore esse nostrud exercitation id sunt aliqua quis.\r\n",
+        "icon": "http://placehold.it/32x32"
+    },
+    {
+        "id": 6,
+        "name": "Providco",
+        "description": "Amet fugiat commodo est laborum Lorem aute occaecat velit et officia dolore velit esse. Culpa laborum sit commodo reprehenderit officia fugiat. Pariatur laborum consequat ea non. Officia sit dolor aliquip anim eiusmod magna ullamco deserunt. Eiusmod aliqua dolor excepteur occaecat aliquip ad.\r\n",
+        "icon": "http://placehold.it/32x32"
+    }
+]
