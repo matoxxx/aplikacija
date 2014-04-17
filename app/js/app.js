@@ -2,23 +2,27 @@
 
 /* App Module */
 
-var phonecatApp = angular.module('phonecatApp', [
+var betAfriendApp = angular.module('betAfriendApp', [
   'ngRoute',
-  'phonecatControllers'
+  'betAfriendControllers'
 ]);
 
-phonecatApp.config(['$routeProvider',
+betAfriendApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
-      when('/phones', {
-        templateUrl: 'partials/phone-list.html',
-        controller: 'PhoneListCtrl'
-      }).
-      when('/phones/:phoneId', {
-        templateUrl: 'partials/phone-detail.html',
-        controller: 'PhoneDetailCtrl'
-      }).
-      otherwise({
-        redirectTo: '/phones'
-      });
-  }]);
+        when('/bets', {
+            templateUrl: 'partials/bet-list.html',
+            controller: 'BetListCtrl'
+        }).
+        when('/bet/:betId', {
+            templateUrl: 'partials/user-detail.html',
+            controller: 'UserDetailCtrl'
+        }).
+        when('/bet/:betId', {
+            templateUrl: 'partials/bet-detail.html',
+            controller: 'BetDetailCtrl'
+        }).
+        otherwise({
+            redirectTo: '/'
+        });
+    }]);

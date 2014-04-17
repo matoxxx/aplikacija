@@ -2,20 +2,36 @@
 
 /* Controllers */
 
-var phonecatControllers = angular.module('phonecatControllers', []);
+var betAfriendControllers = angular.module('betAfriendControllers', []);
 
-phonecatControllers.controller('PhoneListCtrl', ['$scope', '$http',
+betAfriendControllers.controller('BetListCtrl', ['$scope', '$http',
   function($scope, $http) {
-    $http.get('phones/phones.json').success(function(data) {
-      $scope.phones = data;
+    $http.get('json/bets.json').success(function(data) {
+      $scope.bets = data;
     });
 
     $scope.orderProp = 'age';
   }]);
 
-phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams', '$http',
+betAfriendControllers.controller('ategoriesListCtrl', ['$scope', '$http',
+  function($scope, $http) {
+    $http.get('json/categories.json').success(function(data) {
+      $scope.categories = data;
+    });
+
+    $scope.orderProp = 'age';
+  }]);
+
+betAfriendControllers.controller('BetDetailCtrl', ['$scope', '$routeParams', '$http',
   function($scope, $routeParams, $http) {
-    $http.get('phones/' + $routeParams.phoneId + '.json').success(function(data) {
+    $http.get('json/' + $routeParams.phoneId + '.json').success(function(data) {
+      $scope.phone = data;
+    });
+  }]);
+
+betAfriendControllers.controller('UserDetailCtrl', ['$scope', '$routeParams', '$http',
+  function($scope, $routeParams, $http) {
+    $http.get('json/' + $routeParams.phoneId + '.json').success(function(data) {
       $scope.phone = data;
     });
   }]);
