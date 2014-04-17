@@ -10,8 +10,12 @@ var betAfriendApp = angular.module('betAfriendApp', [
 betAfriendApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
+        when('/', {
+            templateUrl: 'partials/main-page.html',
+            controller: 'BetListCtrl'
+        }).
         when('/bets', {
-            templateUrl: 'partials/bet-list.html',
+            templateUrl: 'partials/list-view.html',
             controller: 'BetListCtrl'
         }).
         when('/bet/:betId', {

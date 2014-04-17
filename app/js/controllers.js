@@ -13,7 +13,7 @@ betAfriendControllers.controller('BetListCtrl', ['$scope', '$http',
     $scope.orderProp = 'age';
   }]);
 
-betAfriendControllers.controller('ategoriesListCtrl', ['$scope', '$http',
+betAfriendControllers.controller('CategoriesListCtrl', ['$scope', '$http',
   function($scope, $http) {
     $http.get('json/categories.json').success(function(data) {
       $scope.categories = data;
