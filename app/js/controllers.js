@@ -11,6 +11,7 @@ betAfriendControllers.controller('BetListCtrl', ['$scope', '$http',
     });
 
     $scope.orderProp = 'age';
+    loadTagCategories("categoriesTags");
   }]);
 
 betAfriendControllers.controller('CategoriesListCtrl', ['$scope', '$http',
