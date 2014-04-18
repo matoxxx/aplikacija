@@ -18,6 +18,14 @@ betAfriendApp.config(['$routeProvider',
             templateUrl: 'partials/list-view.html',
             controller: 'BetListCtrl'
         }).
+        when('/create', {
+            templateUrl: 'partials/create-bet.html',
+            controller: 'BetListCtrl'
+        }).
+        when('/browse', {
+            templateUrl: 'partials/browse-bets.html',
+            controller: 'BetListCtrl'
+        }).
         when('/bet/:betId', {
             templateUrl: 'partials/user-detail.html',
             controller: 'UserDetailCtrl'
