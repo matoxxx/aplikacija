@@ -1,1 +1,1 @@
-web: node web.js
+web: ./node_modules/grunt-cli/bin/grunt expressServer:dist:keepalive
