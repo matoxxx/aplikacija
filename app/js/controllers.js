@@ -34,7 +34,11 @@ betAfriendControllers.controller('BetListCtrl', ['$scope', '$http',
     ];
 
     loadTagCategories("categoriesTags");
+<<<<<<< HEAD
     $('.tooltip1').tooltip();
+=======
+    $(':checkbox').checkbox();
+>>>>>>> matox/angular
   }]);
 
 betAfriendControllers.controller('CategoriesListCtrl', ['$scope', '$http',

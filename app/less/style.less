@@ -45,6 +45,13 @@
 @brand-danger:              @alizarin;
 @brand-info:                @peter-river;
 
+
+/* HELPERS */
+.align-center {
+	margin: 0 auto;
+	text-align: center;
+}
+
 /* HEADER */
 nav {
 	background: @midnight-blue !important;
@@ -106,6 +113,12 @@ nav {
 	h4 {
 		text-align: center;
 	}
+
+	#lastsBets {
+		small {
+			font-size: 0.6em;
+		}
+	}
 }
 
 
@@ -134,6 +147,25 @@ footer {
 		float: left;
 		width: 100%;
 		margin: 5px 0;
+	}
+
+	.betHolders {
+		margin: 0 auto;
+		text-align: center;
+
+		&.betVs {
+			position: relative;
+			top: 25px;
+			height: 100px;
+		}
+	}
+
+	.ruleList {
+		padding: 0;
+
+		li {
+			list-style: none;
+		}
 	}
 }
 
