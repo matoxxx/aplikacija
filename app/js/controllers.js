@@ -12,6 +12,7 @@ betAfriendControllers.controller('BetListCtrl', ['$scope', '$http',
 
     $scope.orderProp = 'age';
     loadTagCategories("categoriesTags");
+    $(':checkbox').checkbox();
   }]);
 
 betAfriendControllers.controller('CategoriesListCtrl', ['$scope', '$http',
