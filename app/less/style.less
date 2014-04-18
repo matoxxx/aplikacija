@@ -53,6 +53,7 @@ nav {
 
 	a {
 		color: white;
+		font-weight: 100 !important;
 
 		&:hover {
 			background: @midnight-blue !important;
@@ -126,13 +127,7 @@ footer {
 	}
 }
 
-@media (max-width: 767px) {
-	.navbar-form {
-		margin: 3px -21px;
-		width: auto;
-		padding: 0 30px;
-	}
-}
+/* CREATE BET VIEW */
 
 #createBet {
 	.form-row {
@@ -142,3 +137,26 @@ footer {
 	}
 }
 
+/* MEDIA */
+
+@media (max-width: 767px) {
+	.navbar-form {
+		margin: 3px -21px;
+		width: auto;
+		padding: 0 30px;
+	}
+
+	.ng-scope {
+		position: relative;
+		margin-top: 50px;
+	}
+}
+
+@media(min-width:768px){}
+@media(min-width:992px){}
+@media(min-width:1200px){
+	.ng-scope {
+		position: relative;
+		margin-top: 0px;
+	}
+}
