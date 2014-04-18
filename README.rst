@@ -1,12 +1,12 @@
 BetAFriend
 =========================
 
-.. contents::
+.. ##### Contents::
 
 Authors
 -------
-Blaž Artač
-Matej Hočevar
+* Blaž Artač
+* Matej Hočevar
 
 About the idea
 --------------
@@ -19,7 +19,7 @@ Installation
 
 0. First if you want to use this app you will need `node.js`
 
-1. Clone from the GitHub_ repository::
+1. Clone from the GitHub repository::
 
     git clone https://github.com/BetAFriend/BetAFriend.git
 
