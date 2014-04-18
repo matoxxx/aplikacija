@@ -9,14 +9,13 @@
                   </span>
             </div>
         </form>
-        <br><br>
-<div class="btn-group pull-right">
-  <button type="button" class="btn btn-default">Left</button>
-  <button type="button" class="btn btn-default">Middle</button>
-  <button type="button" class="btn btn-default">Right</button>
+<div class="btn-group pull-right status-button">
+  <button type="button" class="btn btn-default">In progress</button>
+  <button type="button" class="btn btn-default">Pending</button>
+  <button type="button" class="btn btn-default">Finished</button>
 </div>
 <br>
-<table class="table table-responsive">
+<table class="table table-responsive" ng-controller="BetListCtrl">
     <thead>
         <tr>
             <th>#</th>
@@ -32,13 +31,14 @@
     <tbody>
         <tr ng-repeat="bet in bets">
             <td>1</td>
-            <td>{{bets.name}}</td>
-            <td><div data-placement="top" class="tooltip1" title="{{bets.description}}">This bet is about drinking 9 cups of beer in about half an hour, without throwing up.</div></td>
-            <td>johncarter@mail.com</td>
-            <td>Friends</td>
-            <td>In progress</td>
+            <td>{{bet.name}}</td>
+ <td><div class="tooltip1" data-placement="top" title="{{bet.betDetails[0].betDescription[0].description}}">{{bet.betDetails[0].betDescription[0].description}}</div></td>
+           
+            <td>{{users[betsUsers[bet.id].betHolder[0].userID].name}}</td>
+            <td>{{categories[bet.categories[0].categoryID].name}}</td>
+            <td>{{bet.betDetails[0].betStatus[0].status}}</td>
             <td>10€</td>
-            <td>11.12.1993</td>
+            <td>{{bets.dueDate}}</td>
         </tr>
         <tr>
             <td>2</td>

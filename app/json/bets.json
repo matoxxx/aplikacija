@@ -1,7 +1,7 @@
 [
     {
         "id": 0,
-        "name": "Voipa",
+        "name": "Voi",
         "creationDate": "2014-02-12T17:09:25 -01:00",
         "dueDate": "2014-01-01T17:24:13 -01:00",
         "categories": [
@@ -36,7 +36,7 @@
                 ],
                 "betStatus": [
                     {
-                        "status": "inprogress",
+                        "status": "In Progress",
                         "result": "holderWon"
                     }
                 ]
@@ -52,7 +52,7 @@
     },
     {
         "id": 1,
-        "name": "Exoteric",
+        "name": "Exric",
         "creationDate": "2014-04-08T08:30:17 -02:00",
         "dueDate": "2014-03-22T07:03:53 -01:00",
         "categories": [

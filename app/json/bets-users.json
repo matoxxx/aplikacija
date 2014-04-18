@@ -16,7 +16,7 @@
         "betID": 1,
         "betHolder": [
             {
-                "userID": 0
+                "userID": 1
             }
         ],
         "betVersus": [
@@ -29,7 +29,46 @@
         "betID": 2,
         "betHolder": [
             {
+                "userID": 2
+            }
+        ],
+        "betVersus": [
+            {
                 "userID": 0
+            }
+        ]
+    },
+    {
+        "betID": 3,
+        "betHolder": [
+            {
+                "userID": 3
+            }
+        ],
+        "betVersus": [
+            {
+                "userID": 0
+            }
+        ]
+    },
+    {
+        "betID": 4,
+        "betHolder": [
+            {
+                "userID": 4
+            }
+        ],
+        "betVersus": [
+            {
+                "userID": 0
+            }
+        ]
+    },
+    {
+        "betID": 5,
+        "betHolder": [
+            {
+                "userID": 5
             }
         ],
         "betVersus": [
