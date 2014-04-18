@@ -36,6 +36,7 @@
 
 // Silvers
 @dark-silver: 				#333;
+@light-silver:    			rgba(255,255,255,0.5);
 
 // Brand colors
 @brand-primary:             @wet-asphalt;
@@ -71,6 +72,16 @@ nav {
 				border-bottom-color: @peter-river  !important;
 			}
 		}	
+	}
+
+	#search {
+		input, .btn {
+			border: 1px solid @light-silver;
+		}
+
+		.btn {
+			border-left: none;
+		}
 	}
 
 	input:focus {
