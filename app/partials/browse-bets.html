@@ -3,13 +3,13 @@
         <h3>Browse bets</h3>
   		<form id="browseBets">
 			<div class="input-group pull-right col-md-4">                               
-                  <input type="text" class="form-control" placeholder="Search" id="search-query-3">
+                  <input type="text" class="form-control" placeholder="Search" id="search-query-3" ng-model="searchText">
                   <span class="input-group-btn">
                     <button type="submit" class="btn"><span class="fui-search"></span></button>
                   </span>
             </div>
         </form>
-<div class="btn-group pull-right status-button">
+<div class="btn-group pull-right status-button" ng-model="searchText">
   <button type="button" class="btn btn-default">In progress</button>
   <button type="button" class="btn btn-default">Pending</button>
   <button type="button" class="btn btn-default">Finished</button>
@@ -29,7 +29,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="bet in bets">
+        <tr ng-repeat="bet in bets | filter:searchText:false">
             <td>1</td>
             <td>{{bet.name}}</td>
  <td><div class="tooltip1" data-placement="top" title="{{bet.betDetails[0].betDescription[0].description}}">{{bet.betDetails[0].betDescription[0].description}}</div></td>
@@ -39,26 +39,6 @@
             <td>{{bet.betDetails[0].betStatus[0].status}}</td>
             <td>10€</td>
             <td>{{bets.dueDate}}</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Peter</td>
-            <td><span class="tooltip1" data-placement="top" title="This bet is about drinking 9 cups of beer in about half an hour, without throwing up.">This bet is...</span></td>
-            <td>peterparker@mail.com</td>
-            <td>Friends</td>
-            <td>Finished</td>
-            <td>12€</td>
-            <td>11.12.1993</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>John</td>
-            <td><span class="tooltip1" data-placement="top" title="This bet is about drinking 9 cups of beer in about half an hour, without throwing up.">This bet is...</span></td>
-            <td>johnrambo@mail.com</td>
-            <td>Friends</td>
-            <td>Pending</td>
-            <td>5€</td>
-            <td>11.12.1993</td>
         </tr>
     </tbody>
 </table>
