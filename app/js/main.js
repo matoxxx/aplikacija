@@ -9,3 +9,4 @@ function loadTagCategories(id) {
 	   'defaultText':'+',
 	});
 }
+
