@@ -26,6 +26,14 @@ betAfriendApp.config(['$routeProvider',
             templateUrl: 'partials/browse-bets.html',
             controller: 'BetListCtrl'
         }).
+        when('/profile', {
+            templateUrl: 'partials/user-profile.html',
+            controller: 'UserDetailCtrl'
+        }).        
+        when('/my-bets', {
+            templateUrl: 'partials/my-bets.html',
+            controller: 'BetDetailCtrl'
+        }).     
         when('/bet/:betId', {
             templateUrl: 'partials/user-detail.html',
             controller: 'UserDetailCtrl'
@@ -33,7 +41,7 @@ betAfriendApp.config(['$routeProvider',
         when('/bet/:betId', {
             templateUrl: 'partials/bet-detail.html',
             controller: 'BetDetailCtrl'
-        }).
+        }).           
         otherwise({
             redirectTo: '/'
         });

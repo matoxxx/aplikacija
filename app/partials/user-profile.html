@@ -1,0 +1,66 @@
+<div class="jumbotron">
+    <div class="container">
+        <h3>Profile of {{users[0].name}}</h3>
+            <div>
+                <span class="label label-default">Personal details</span>
+            </div>
+            <div>
+                <img src="{{users[0].avatarIcon}}" class="img-responsive img-thumbnail img-user">
+            </div>
+            <table class="table table-responsive table-user-details">
+                <tr>
+                    <td>Username:</td>
+                    <td>{{users[0].displayName}}</td>
+                </tr>
+                <tr>
+                    <td>E-mail:</td>
+                    <td>{{users[0].email}}</td>
+                </tr>            
+                <tr>
+                    <td>Name:</td>
+                    <td>{{users[0].name}}</td>
+                </tr>
+                <tr>
+                    <td>Location:</td>
+                    <td>{{users[0].location}}</td>
+                </tr> 
+                <tr>
+                    <td>Birth date:</td>
+                    <td>{{users[0].birthDate}}</td>
+                </tr>                   
+                <tr>
+                    <td>About me:</td>
+                    <td>{{users[0].aboutUser}}</td>
+                </tr>                                                 
+
+            </table>
+    </div>
+    <div class="container">
+        <div>
+            <span class="label label-default">Personal statistic</span>
+        </div>
+        <br>
+           <table class="table table-responsive table-user-statistics">
+            <tr>
+                <td>Creation date:</td>
+                <td>{{users[0].creationDate}}</td>
+            </tr>
+            <tr>
+                <td>Last login:</td>
+                <td>{{users[0].lastLogin}}</td>
+            </tr>            
+            <tr>
+                <td>Last bet:</td>
+                <td>{{users[0].lastBet}}</td>
+            </tr>
+            <tr>
+                <td>Bets won:</td>
+                <td>{{users[0].betsWon}}</td>
+            </tr>  
+            <tr>
+                <td>Bets lost:</td>
+                <td>{{users[0].betsLost}}</td>
+            </tr>   
+        </table>        
+    </div>
+ </div>

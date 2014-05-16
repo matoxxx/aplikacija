@@ -1,0 +1,90 @@
+<div class="jumbotron">
+    <div class="container">
+        <h3>My bets</h3>
+        <!-- link na isto stran do pododdelkov active, ... 
+        <a href="#active">active</a>
+         -->
+   
+    </div>
+
+    <div class="container">
+        <div>
+            <span class="label label-default"><a id="active">Active</a></span>
+        </div>
+        <br>
+        <table class="table table-responsive" ng-controller="BetListCtrl">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Categories</th>
+                    <th>Reward</th>
+                    <th>End date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="bet in bets | filter:searchText:false">
+                    <td>1</td>
+                    <td>{{bet.name}}</td>                   
+                    <td>{{categories[bet.categories[0].categoryID].name}}</td>
+                    <td>10€</td>
+                    <td>{{bets.dueDate}}</td>
+                </tr>
+            </tbody>
+        </table>        
+    </div>    
+
+    <div class="container">
+        <div>
+            <span class="label label-default">Pending</span>
+        </div>
+        <br>
+        <table class="table table-responsive" ng-controller="BetListCtrl">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Categories</th>
+                    <th>Reward</th>
+                    <th>End date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="bet in bets | filter:searchText:false">
+                    <td>1</td>
+                    <td>{{bet.name}}</td>                   
+                    <td>{{categories[bet.categories[0].categoryID].name}}</td>
+                    <td>10€</td>
+                    <td>{{bets.dueDate}}</td>
+                </tr>
+            </tbody>
+        </table>          
+    </div>   
+
+    <div class="container">
+        <div>
+            <span class="label label-default">Closed</span>
+        </div>
+        <br>
+        <table class="table table-responsive" ng-controller="BetListCtrl">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Categories</th>
+                    <th>Reward</th>
+                    <th>End date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="bet in bets | filter:searchText:false">
+                    <td>1</td>
+                    <td>{{bet.name}}</td>                   
+                    <td>{{categories[bet.categories[0].categoryID].name}}</td>
+                    <td>10€</td>
+                    <td>{{bets.dueDate}}</td>
+                </tr>
+            </tbody>
+        </table>          
+    </div>           
+ </div>
