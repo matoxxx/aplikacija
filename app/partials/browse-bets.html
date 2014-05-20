@@ -1,69 +1,99 @@
 <div class="jumbotron">
     <div class="container">
         <h3>Browse bets</h3>
-  		<form id="browseBets">
-			<div class="input-group pull-right col-md-4">                               
-                  <input type="text" class="form-control" placeholder="Search" id="search-query-3" ng-model="searchText">
-                  <span class="input-group-btn">
-                    <button type="submit" class="btn"><span class="fui-search"></span></button>
-                  </span>
+        <form id="browseBets">
+            <div class="input-group pull-right col-md-4">
+                <input type="text" class="form-control" placeholder="Search" id="search-query-3" ng-model="searchText">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn">
+                        <span class="fui-search"></span>
+                    </button>
+                </span>
             </div>
         </form>
-<div class="btn-group pull-right status-button" ng-model="searchText">
-  <button type="button" class="btn btn-default">In progress</button>
-  <button type="button" class="btn btn-default">Pending</button>
-  <button type="button" class="btn btn-default">Finished</button>
-</div>
-<br>
-<table class="table table-responsive" ng-controller="BetListCtrl">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Author</th>
-            <th>Categories</th>
-            <th>Status</th>
-            <th>Reward</th>
-            <th>End date</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="bet in bets | filter:searchText:false">
-            <td>1</td>
-            <td>{{bet.name}}</td>
- <td><div class="tooltip1" data-placement="top" title="{{bet.betDetails[0].betDescription[0].description}}">{{bet.betDetails[0].betDescription[0].description}}</div></td>
-           
-            <td>{{users[betsUsers[bet.id].betHolder[0].userID].name}}</td>
-            <td>{{categories[bet.categories[0].categoryID].name}}</td>
-            <td>{{bet.betDetails[0].betStatus[0].status}}</td>
-            <td>10€</td>
-            <td>{{bets.dueDate}}</td>
-        </tr>
-    </tbody>
-</table>
- <div class="pagination browseBetsPagination">
-		  <ul>
-		    <li class="previous">
-		      <a href="#" class="fui-arrow-left"></a>
-		    </li>
+        <div class="btn-group pull-right status-button" ng-model="searchText" data-toggle="buttons">
+            <label class="btn btn-default">
+                <input type="radio" name="status-options" id="status-all"/>All
+            </label>
+            <label class="btn btn-default">
+                <input type="radio" name="status-options" id="status-progress"/>In progress
+            </label>
+            <label class="btn btn-default">
+                <input type="radio" name="status-options" id="status-pending"/>Pending
+            </label>
+            <label class="btn btn-default">
+                <input type="radio" name="status-options" id="status-finished"/>Finished
+            </label>
+        </div>
+        <br>
+        <table class="table table-responsive" ng-controller="BetListCtrl">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Author</th>
+                    <th>Categories</th>
+                    <th>Status</th>
+                    <th>Reward</th>
+                    <th>End date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="bet in bets | filter:searchText:false">
+                    <td>1</td>
+                    <td>{{bet.name}}</td>
+                    <td>
+                        <div class="tooltip1" data-placement="top" title="{{bet.betDetails[0].betDescription[0].description}}">{{bet.betDetails[0].betDescription[0].description}}</div>
+                    </td>
 
-		    <li class="active"><a href="#fakelink">1</a></li>
-		    <li class="active"><a href="#fakelink">2</a></li>
-		    <li class="active"><a href="#fakelink">3</a></li>
-		    <li class="active"><a href="#fakelink">4</a></li>
-		    <li class="active"><a href="#fakelink">5</a></li>
-		    <li class="active"><a href="#fakelink">6</a></li>
-		    <li class="active"><a href="#fakelink">7</a></li>
-		    <li class="active"><a href="#fakelink">8</a></li>
+                    <td>{{users[betsUsers[bet.id].betHolder[0].userID].name}}</td>
+                    <td>{{categories[bet.categories[0].categoryID].name}}</td>
+                    <td>{{bet.betDetails[0].betStatus[0].status}}</td>
+                    <td>10€</td>
+                    <td>{{bets.dueDate}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="pagination browseBetsPagination">
+            <ul>
+                <li class="previous">
+                    <a href="#" class="fui-arrow-left"></a>
+                </li>
 
-		    ...
-		    <li><a href="#fakelink">10</a></li>
+                <li class="active">
+                    <a href="#fakelink">1</a>
+                </li>
+                <li class="active">
+                    <a href="#fakelink">2</a>
+                </li>
+                <li class="active">
+                    <a href="#fakelink">3</a>
+                </li>
+                <li class="active">
+                    <a href="#fakelink">4</a>
+                </li>
+                <li class="active">
+                    <a href="#fakelink">5</a>
+                </li>
+                <li class="active">
+                    <a href="#fakelink">6</a>
+                </li>
+                <li class="active">
+                    <a href="#fakelink">7</a>
+                </li>
+                <li class="active">
+                    <a href="#fakelink">8</a>
+                </li>
+                ...
+                <li>
+                    <a href="#fakelink">10</a>
+                </li>
 
-		    <li class="next">
-		      <a href="#" class="fui-arrow-right"></a>
-		    </li>
-		  </ul>
-		</div>
+                <li class="next">
+                    <a href="#" class="fui-arrow-right"></a>
+                </li>
+            </ul>
+        </div>
     </div>
- </div>
+</div>
