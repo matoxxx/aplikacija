@@ -1,0 +1,66 @@
+<div class="jumbotron" ng-controller="UserDetailController">
+    <div class="container">
+        <h3>Profile of {{user.name}}</h3>
+            <div>
+                <span class="label label-default">Personal details</span>
+            </div>
+            <div>
+                <img src="{{user.avatarIcon}}" class="img-responsive img-thumbnail img-user">
+            </div>
+            <table class="table table-responsive table-user-details">
+                <tr>
+                    <td>Username:</td>
+                    <td>{{user.displayName}}</td>
+                </tr>
+                <tr>
+                    <td>E-mail:</td>
+                    <td>{{user.email}}</td>
+                </tr>            
+                <tr>
+                    <td>Name:</td>
+                    <td>{{user.name}}</td>
+                </tr>
+                <tr>
+                    <td>Location:</td>
+                    <td>{{user.location}}</td>
+                </tr> 
+                <tr>
+                    <td>Birth date:</td>
+                    <td>{{user.birthDate}}</td>
+                </tr>                   
+                <tr>
+                    <td>About me:</td>
+                    <td>{{user.aboutUser}}</td>
+                </tr>                                                 
+
+            </table>
+    </div>
+    <div class="container">
+        <div>
+            <span class="label label-default">Personal statistic</span>
+        </div>
+        <br>
+           <table class="table table-responsive table-user-statistics">
+            <tr>
+                <td>Creation date:</td>
+                <td>{{user.creationDate}}</td>
+            </tr>
+            <tr>
+                <td>Last login:</td>
+                <td>{{user.lastLogin}}</td>
+            </tr>            
+            <tr>
+                <td>Last bet:</td>
+                <td>{{user.lastBet}}</td>
+            </tr>
+            <tr>
+                <td>Bets won:</td>
+                <td>{{user.betsWon}}</td>
+            </tr>  
+            <tr>
+                <td>Bets lost:</td>
+                <td>{{user.betsLost}}</td>
+            </tr>   
+        </table>        
+    </div>
+ </div>

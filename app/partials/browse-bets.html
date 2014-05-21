@@ -26,7 +26,7 @@
             </label>
         </div>
         <br>
-        <table class="table table-responsive" ng-controller="BetListCtrl">
+        <table class="table table-responsive" ng-controller="BrowseBetsController">
             <thead>
                 <tr>
                     <th>#</th>
@@ -41,7 +41,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="bet in bets | filter:searchText:false">
-                    <td>1</td>
+                    <td>{{bet.id}}</td>
                     <td>{{bet.name}}</td>
                     <td>
                         <div class="tooltip1" data-placement="top" title="{{bet.betDetails[0].betDescription[0].description}}">{{bet.betDetails[0].betDescription[0].description}}</div>

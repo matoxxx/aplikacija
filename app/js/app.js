@@ -12,36 +12,40 @@ betAfriendApp.config(['$routeProvider',
     $routeProvider.
         when('/', {
             templateUrl: 'partials/main-page.html',
-            controller: 'BetListCtrl'
+            controller: 'DashboardController'
         }).
         when('/bets', {
-            templateUrl: 'partials/list-view.html',
-            controller: 'BetListCtrl'
+            templateUrl: 'partials/browse-bets.html',
+            controller: 'BrowseBetsController'
         }).
         when('/create', {
             templateUrl: 'partials/create-bet.html',
-            controller: 'BetListCtrl'
+            controller: 'CreateBetController'
         }).
         when('/browse', {
             templateUrl: 'partials/browse-bets.html',
-            controller: 'BetListCtrl'
+            controller: 'BrowseBetsController'
         }).
         when('/profile', {
             templateUrl: 'partials/user-profile.html',
-            controller: 'UserDetailCtrl'
-        }).        
+            controller: 'ProfileController'
+        }).
         when('/my-bets', {
             templateUrl: 'partials/my-bets.html',
-            controller: 'BetDetailCtrl'
-        }).     
-        when('/bet/:betId', {
+            controller: 'BetDetailController'
+        }).
+        when('/user/:userId', {
             templateUrl: 'partials/user-detail.html',
-            controller: 'UserDetailCtrl'
+            controller: 'UserDetailController'
         }).
         when('/bet/:betId', {
             templateUrl: 'partials/bet-detail.html',
-            controller: 'BetDetailCtrl'
-        }).           
+            controller: 'BetDetailController'
+        }).
+        when('/friends', {
+            templateUrl: 'partials/friends.html',
+            controller: 'FriendListController'
+        }).
         otherwise({
             redirectTo: '/'
         });

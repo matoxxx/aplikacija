@@ -2,78 +2,79 @@
 
 /* Controllers */
 
-var betAfriendControllers = angular.module('betAfriendControllers', []);
+var betAfriendControllers = angular.module('betAfriendControllers', ["firebase"]);
 
-betAfriendControllers.controller('BetListCtrl', ['$scope', '$http',
-  function($scope, $http) {
+/* DASHBOARD CONTROLLER */ 
+betAfriendControllers.controller('DashboardController', ['$scope', '$http', function($scope, $firebase, $http) {
     $http.get('json/bets.json').success(function(data) {
-      $scope.bets = data;
+        $scope.bets = data;
     });
-    $http.get('json/categories.json').success(function(data) {
-      $scope.categories = data;
-    });
-    $http.get('json/bets-users.json').success(function(data) {
-      $scope.betsUsers = data;
-    });
-    $http.get('json/users.json').success(function(data) {
-      $scope.users = data;
-    });
-      $('.tooltip1').tooltip();
-    /*$scope.bets = [
-      {'name': 'kdo je bolši',
-       'description': 'Fast just got faster with Nexus S.', 
-       'author': 'john doe',
-       'categories': 'Friends',
-       'Status': 'In progress',
-       'reward': '10€',
-       'end date': '12.2.2015'},
-      {'name': 'drinking beer',
-       'description': 'This bet is about drinking 9 cups of beer in about half an hour, without throwing up.', 
-       'author': 'janez novak',
-       'categories': 'Fun&Party',
-       'Status': 'Finished',
-       'reward': '15€',
-       'end date': '17.4.2014'},
-      {'name': 'sporting',
-       'description': 'Who will be the faster in 60m race.', 
-       'author': 'športni navdušenec',
-       'categories': 'Sport',
-       'Status': 'Pending',
-       'reward': '5€',
-       'end date': '17.4.2014'},
 
-    ];*/
+    $http.get('json/categories.json').success(function(data) {
+        $scope.categories = data;
+    });
+
+    $http.get('json/bets-users.json').success(function(data) {
+        $scope.betsUsers = data;
+    });
+
+    $http.get('json/users.json').success(function(data) {
+        $scope.users = data;
+    });
 
     loadTagCategories("categoriesTags");
-
-    //$(document).ready(function() {
-      $('.tooltip1').tooltip();
-    //}
-
     $(':checkbox').checkbox();
-      $('.tooltip1').tooltip();
+    $('.tooltip1').tooltip();
 
-  }]);
+}]);
 
-betAfriendControllers.controller('CategoriesListCtrl', ['$scope', '$http',
-  function($scope, $http) {
+/* BROWSE BETS CONTROLLER */
+betAfriendControllers.controller('BrowseBetsController', ['$scope', '$http', '$firebase', function($scope, $http, $firebase) {
+    var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/");
+    var usersSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/users/");
+    $scope.bets = $firebase(betsSource);
+    $scope.bets = $firebase(usersSource);
+    $scope.orderProp = 'age';
+}]);
+
+/* CREATE BET CONTROLLER */
+betAfriendControllers.controller('CreateBetController', ['$scope', '$http', function($scope, $firebase, $http) {
     $http.get('json/categories.json').success(function(data) {
-      $scope.categories = data;
+        $scope.categories = data;
     });
 
     $scope.orderProp = 'age';
-  }]);
+}]);
 
-betAfriendControllers.controller('BetDetailCtrl', ['$scope', '$routeParams', '$http',
-  function($scope, $routeParams, $http) {
-    $http.get('json/' + $routeParams.phoneId + '.json').success(function(data) {
-      $scope.phone = data;
-    });
-  }]);
+/* BET DETAIL CONTROLLER */
+betAfriendControllers.controller('BetDetailController', ['$scope', '$firebase', '$routeParams', '$http', function($scope, $firebase, $routeParams, $http) {
+    var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/" + $routeParams.betId);
+    $scope.bet = $firebase(betsSource);
+}]);
 
-betAfriendControllers.controller('UserDetailCtrl', ['$scope', '$routeParams', '$http',
-  function($scope, $routeParams, $http) {
+/* USER DETAIL CONTROLLER */
+betAfriendControllers.controller('UserDetailController', ['$scope', '$firebase', '$routeParams', '$http', function($scope, $firebase, $routeParams, $http) {
+    var usersSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/users/" + $routeParams.userId);
+    $scope.user = $firebase(usersSource);
+}]);
+
+/* PROFILE CONTROLLER */
+betAfriendControllers.controller('ProfileController', ['$scope', '$routeParams', '$http', function($scope, $firebase, $routeParams, $http) {
     $http.get('json/users.json').success(function(data) {
-      $scope.users = data;
+        $scope.users = data;
     });
-  }]);
+}]);
+
+/* MY BETS CONTROLLER */
+betAfriendControllers.controller('MyBetsController', ['$scope', '$routeParams', '$http', function($scope, $firebase, $routeParams, $http) {
+    $http.get('json/users.json').success(function(data) {
+        $scope.users = data;
+    });
+}]);
+
+/* FRIENDS LIST CONTROLLER */
+betAfriendControllers.controller('FriendsListController', ['$scope', '$routeParams', '$http', function($scope, $firebase, $routeParams, $http) {
+    $http.get('json/users.json').success(function(data) {
+        $scope.users = data;
+    });
+}]);
