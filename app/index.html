@@ -52,13 +52,13 @@
 							</div>
 						</form>
 					</li>
-					<li id="userScore">
+					<li id="userScore" ng-if="scope.user">
 						<a href="#fakelink">
 							<span class="icon-star3"></span>
 							32
 						</a>
 					</li>
-					<li class="dropdown user-dropdown">
+					<li class="dropdown user-dropdown" ng-if="scope.user">
 						<a href="" class="dropdown-toggle" data-toggle="dropdown">
 							<span class="icon-user"></span>
 							Admin
@@ -90,6 +90,9 @@
 								</a>
 							</li>
 						</ul>
+					</li>
+					<li ng-if="!scope.user">
+						<button id="loginBtn">Login/Register</button>
 					</li>
 				</ul>
 			</div>
