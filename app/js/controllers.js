@@ -23,7 +23,7 @@ betAfriendControllers.controller('DashboardController', ['$scope', '$http', func
     });
 
     loadTagCategories("categoriesTags");
-    $(':checkbox').checkbox();
+    $('.checkbox').checkbox();
     $('.tooltip1').tooltip();
 
 }]);
@@ -35,6 +35,8 @@ betAfriendControllers.controller('BrowseBetsController', ['$scope', '$http', '$f
     $scope.bets = $firebase(betsSource);
     $scope.bets = $firebase(usersSource);
     $scope.orderProp = 'age';
+
+    $('.tooltip1').tooltip();
 }]);
 
 /* CREATE BET CONTROLLER */
@@ -44,6 +46,9 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$http', func
     });
 
     $scope.orderProp = 'age';
+
+    loadTagCategories("categoriesTags");
+    $('.checkbox').checkbox();
 }]);
 
 /* BET DETAIL CONTROLLER */
@@ -77,4 +82,9 @@ betAfriendControllers.controller('FriendsListController', ['$scope', '$routePara
     $http.get('json/users.json').success(function(data) {
         $scope.users = data;
     });
+}]);
+
+/* AUTHENTICATION CONTROLLER */
+betAfriendControllers.controller('AuthenticationController', ['$scope', '$routeParams', '$http', function($scope, $firebase, $routeParams, $http) {
+    
 }]);
