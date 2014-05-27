@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-var betAfriendControllers = angular.module('betAfriendControllers', ["firebase"]);
+var betAfriendControllers = angular.module('betAfriendControllers', ["firebase", "ui.bootstrap"]);
 
 /* DASHBOARD CONTROLLER */ 
 betAfriendControllers.controller('DashboardController', ['$scope', '$http', function($scope, $firebase, $http) {
@@ -78,3 +78,52 @@ betAfriendControllers.controller('FriendsListController', ['$scope', '$routePara
         $scope.users = data;
     });
 }]);
+
+/* LOGIN / REGISTER CONTROLLER */
+var loginController = function ($scope, $modal) {
+
+  $scope.items = ['item1', 'item2', 'item3'];
+
+  $scope.openLogin = function (size) {
+
+    var modalInstance = $modal.open({
+        templateUrl: 'login-form.html',
+        controller: ModalInstanceCtrl,
+        size: size,
+        resolve: {
+            items: function () {
+                return $scope.items;
+            }
+        }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+        $scope.selected = selectedItem;
+    });
+  };
+};
+
+// Please note that $modalInstance represents a modal window (instance) dependency.
+// It is not the same as the $modal service used above.
+
+var ModalInstanceCtrl = function ($scope, $modalInstance, items) {
+    $scope.items = items;
+    $scope.selected = {
+        item: $scope.items[0]
+    };
+
+    //TODO: Login using Facebook
+    //TODO: Login using Twitter
+    //TODO: Login using Google Plus
+    //TODO: Simple Login 
+    //TODO: Switch to Registration modal
+    //TODO: Switch to Login modal
+
+    $scope.ok = function () {
+        $modalInstance.close($scope.selected.item);
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+};
