@@ -236,6 +236,50 @@ footer {
 	}
 }
 
+/* MODAL DIALOG */
+.modal-content {
+	box-shadow: none;
+	background: none;
+	border: none;
+
+	.modal-body {
+		background: none;
+	}
+}
+
+/* LOGIN DIALOG */
+.login-form {
+	&:before {
+		border: none;
+	}
+	
+	h4 {
+		border-bottom: 1px solid @green-sea;
+		text-align: center;
+		margin-top: 0;
+		padding-bottom: 10px;
+	}
+
+	.social-logins {
+		list-style: none;
+		margin: 10px 0;
+		padding-left: 0;
+
+		.social-login-item {
+			display: inline-block;
+
+			.social-login-icon {
+				background: none;
+				border: none;
+
+				&:hover {
+					color: @green-sea;
+				}
+			}
+		}
+	}
+}
+
 /* MEDIA */
 
 @media (max-width: 767px) {

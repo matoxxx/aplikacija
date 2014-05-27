@@ -27,8 +27,8 @@ Installation
 
     npm install
 
-3. Run::
+3. Navigate to web.js file and Run::
 
-    npm start
+    node web.js
 
-   and open http://localhost:8000/app
+   and open http://localhost:8000
