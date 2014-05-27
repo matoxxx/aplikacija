@@ -46,6 +46,10 @@ betAfriendApp.config(['$routeProvider',
             templateUrl: 'partials/friends.html',
             controller: 'FriendListController'
         }).
+        when('/login', {
+            templateUrl: 'partials/login-form.html',
+            controller: 'FriendListController'
+        }).
         otherwise({
             redirectTo: '/'
         });
