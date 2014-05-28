@@ -8,6 +8,11 @@ Authors
 * Blaž Artač
 * Matej Hočevar
 
+Demo
+----
+
+Demo - [demo](http://betafriend.eu/ "http://betAfriend.eu")
+
 About the idea
 --------------
 
