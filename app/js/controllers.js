@@ -5,15 +5,15 @@
 var betAfriendControllers = angular.module('betAfriendControllers', ["firebase", "ui.bootstrap"]);
 
 /* DASHBOARD CONTROLLER */ 
-betAfriendControllers.controller('DashboardController', ['$scope', '$http', '$firebase', function($scope, $http, $firebase) {
-    var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/");
-    var usersSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/users/");    
+betAfriendControllers.controller('DashboardControllerLatest', ['$scope', '$http', '$firebase', function($scope, $http, $firebase) {
+    var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/");   
     $scope.bets = $firebase(betsSource);
-    $scope.users = $firebase(usersSource);
 
-    loadTagCategories("categoriesTags");
-    $(':checkbox').checkbox();
-    $('.tooltip1').tooltip();
+}]);
+
+betAfriendControllers.controller('DashboardControllerPopular', ['$scope', '$http', '$firebase', function($scope, $http, $firebase) {
+    var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/");  
+    $scope.bets = $firebase(betsSource);
 
 }]);
 
