@@ -11,8 +11,7 @@ Authors
 Demo
 ----
 
-.. Demo - [demo](http://betafriend.eu/ "http://betAfriend.eu")
-This is an [example link](http://example.com/).
+Demo - http://betAfriend.eu
 
 About the idea
 --------------
