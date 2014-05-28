@@ -86,6 +86,7 @@
                         function addRule(rule) {
                             var numOfRules = $('.ruleList li').length;
                             var ruleId = "rule"+numOfRules;
+                            if (rule != "") {
                             /* dela tudi ta verzija
 
                             var $li = $("<li id='"+ruleId+"'></li>");
@@ -101,9 +102,10 @@
                             $('.ruleList').append($li);
 
                             */                                                    
-                            $('.ruleList').append(
-                                "<li id='"+ruleId+"'><label class='checkbox' for='checkbox"+numOfRules+"'><input type='checkbox' value='' id='checkbox"+numOfRules+"' data-toggle='checkbox'>"+rule+"<button type='button' class='btn btn-danger btn-xs' onclick="+ "deleteRule('"+ruleId+"')"+">Warning</button></label></li>"
-                            );
+                                $('.ruleList').append(
+                                    "<li id='"+ruleId+"'><label class='checkbox' for='checkbox"+numOfRules+"'><input type='checkbox' value='' id='checkbox"+numOfRules+"' data-toggle='checkbox'>"+rule+"<button type='button' class='btn btn-danger btn-xs' onclick="+ "deleteRule('"+ruleId+"')"+">Warning</button></label></li>"
+                                );
+                            }
                         }
 
                         function deleteRule(rule) {
@@ -118,7 +120,7 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Add new rule" id="betRuleAdd" name="betRoleAdd">                            
                                     <span class="input-group-btn">
-                                        <button type="submit" class="btn" onclick="addRule($('#betRuleAdd').val());" >
+                                        <button type="submit" class="btn" onclick="addRule($('#betRuleAdd').val());$('#betRuleAdd').val('');" >
                                             <span class="fui-check"></span>
                                         </button>
                                     </span>

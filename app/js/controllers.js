@@ -5,22 +5,11 @@
 var betAfriendControllers = angular.module('betAfriendControllers', ["firebase", "ui.bootstrap"]);
 
 /* DASHBOARD CONTROLLER */ 
-betAfriendControllers.controller('DashboardController', ['$scope', '$http', function($scope, $firebase, $http) {
-    $http.get('json/bets.json').success(function(data) {
-        $scope.bets = data;
-    });
-
-    $http.get('json/categories.json').success(function(data) {
-        $scope.categories = data;
-    });
-
-    $http.get('json/bets-users.json').success(function(data) {
-        $scope.betsUsers = data;
-    });
-
-    $http.get('json/users.json').success(function(data) {
-        $scope.users = data;
-    });
+betAfriendControllers.controller('DashboardController', ['$scope', '$http', '$firebase', function($scope, $http, $firebase) {
+    var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/");
+    var usersSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/users/");    
+    $scope.bets = $firebase(betsSource);
+    $scope.users = $firebase(usersSource);
 
     loadTagCategories("categoriesTags");
     $(':checkbox').checkbox();

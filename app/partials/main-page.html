@@ -18,41 +18,18 @@
 		</div>
 	</div>
 </div>
-	<section class="stats-container">
+	<section class="stats-container" ng-controller="DashboardController">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3" id="lastsBets">
 					<h4>Last Bets</h4>
 					<div class="list-group">
-						<a href="#" class="list-group-item">
-							<p class="list-group-item-heading">List group item heading</p>
+						<a href="#" class="list-group-item" ng-repeat="bet in bets">
+							<p class="list-group-item-heading">{{bet.name}}</p>
 							<p class="list-group-item-text">
-								<small>16.4.2014</small>
+								<small>{{bet.creationDate}}</small>
+								3
 							</p>						</a>
-						<a href="#" class="list-group-item">
-							<p class="list-group-item-heading">List group item heading</p>
-							<p class="list-group-item-text">
-								<small>16.4.2014</small>
-							</p>
-						</a>
-						<a href="#" class="list-group-item">
-							<p class="list-group-item-heading">List group item heading</p>
-							<p class="list-group-item-text">
-								<small>16.4.2014</small>
-							</p>
-						</a>
-						<a href="#" class="list-group-item">
-							<p class="list-group-item-heading">List group item heading</p>
-							<p class="list-group-item-text">
-								<small>16.4.2014</small>
-							</p>
-						</a>
-						<a href="#" class="list-group-item">
-							<p class="list-group-item-heading">List group item heading</p>
-							<p class="list-group-item-text">
-								<small>16.4.2014</small>
-							</p>
-						</a>
 					</div>
 					<hr>
 <!-- 					<p>
