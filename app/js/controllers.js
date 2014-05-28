@@ -5,20 +5,18 @@
 var betAfriendControllers = angular.module('betAfriendControllers', ["firebase", "ui.bootstrap"]);
 
 /* DASHBOARD CONTROLLER */ 
-betAfriendControllers.controller('DashboardController', ['$scope', '$http', '$firebase', function($scope, $firebase, $http) {
+betAfriendControllers.controller('DashboardController', ['$scope', '$http', '$firebase', function($scope, $http, $firebase) {
     var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/");
     var usersSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/users/");    
+    var categoriesSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/categories/");  
     $scope.bets = $firebase(betsSource);
     $scope.users = $firebase(usersSource);
-
-    loadTagCategories("categoriesTags");
-    $(':checkbox').checkbox();
-    $('.tooltip1').tooltip();
-
+    $scope.categories = $firebase(categoriesSource);
+    $scope.orderProp = 'name';
 }]);
 
 /* BROWSE BETS CONTROLLER */
-betAfriendControllers.controller('BrowseBetsController', ['$scope', '$http', '$firebase', function($scope, $firebase, $http) {
+betAfriendControllers.controller('BrowseBetsController', ['$scope', '$http', '$firebase', function($scope, $http, $firebase) {
     var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/");
     var usersSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/users/");
     $scope.bets = $firebase(betsSource);

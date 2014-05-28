@@ -28,7 +28,6 @@
 							<p class="list-group-item-heading">{{bet.name}}</p>
 							<p class="list-group-item-text">
 								<small>{{bet.creationDate}}</small>
-								3
 							</p>						</a>
 					</div>
 					<hr>
@@ -38,28 +37,13 @@
 				</div>
 				<div class="col-md-3">
 					<h4>Most Popular</h4>
-					<ul class="list-group">
-						<li class="list-group-item">
-							<span class="badge">650</span>
-							Cras justo odio
-						</li>
-						<li class="list-group-item">
-							<span class="badge">410</span>
-							Cras justo odio
-						</li>
-						<li class="list-group-item">
-							<span class="badge">251</span>
-							Cras justo odio
-						</li>
-						<li class="list-group-item">
-							<span class="badge">140</span>
-							Cras justo odio
-						</li>
-						<li class="list-group-item">
-							<span class="badge">46</span>
-							Cras justo odio
-						</li>
-					</ul>
+					<div class="list-group">
+						<a href="#" class="list-group-item" ng-repeat="bet in bets">
+							<p class="list-group-item-heading">{{bet.name}}</p>
+							<p class="list-group-item-text">
+								<small>{{bet.creationDate}}</small>
+							</p>						</a>
+					</div>
 					<hr>
 <!-- 					<p>
 						<a class="btn btn-embossed btn-default" href="#" role="button">more »</a>
@@ -68,25 +52,9 @@
 				<div class="col-md-3">
 					<h4>Bets Per Category</h4>
 					<ul class="list-group">
-						<li class="list-group-item">
-							<span class="badge">650</span>
-							Family
-						</li>
-						<li class="list-group-item">
-							<span class="badge">410</span>
-							Funny
-						</li>
-						<li class="list-group-item">
-							<span class="badge">251</span>
-							Sport
-						</li>
-						<li class="list-group-item">
-							<span class="badge">140</span>
-							School/Work
-						</li>
-						<li class="list-group-item">
-							<span class="badge">46</span>
-							Friends
+		 				<li class="list-group-item" ng-repeat="cat in categories">
+							<span class="badge">{{cat.id}}</span>
+							{{cat.name}}
 						</li>
 					</ul>
 					<hr>
