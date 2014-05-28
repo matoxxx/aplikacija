@@ -39,7 +39,7 @@
                         <div class="form-row">
                             <label class="col-md-3 control-label" for="betReward">Reward</label>
                             <div class="col-md-9">
-                                <input type="text" name="betReward" class="form-control input-sm" placeholder="Reward" required/>
+                                <input type="text" name="betReward" class="form-control input-sm" placeholder="Reward" id="rewardid" required/>
                             </div>
                         </div>
                     </div>
@@ -75,56 +75,63 @@
                             </div>
                         </div>
                     </div>
+                    <script type="text/javascript">
+                        /*$('#betRuleAdd').keydown(function (event) {
+                            var keypressed = event.keyCode || event.which;
+                            if (keypressed == 13) {
+                                addRule($(this).val());
+                            }
+                        });*/
+
+                        function addRule(rule) {
+                            var numOfRules = $('.ruleList li').length;
+                            var ruleId = "rule"+numOfRules;
+                            /* dela tudi ta verzija
+
+                            var $li = $("<li id='"+ruleId+"'></li>");
+                            var $label = $("<label class='checkbox' for='checkbox"+numOfRules+"'></label>");
+                            var $input = $("<input type='checkbox' value='' id='checkbox"+numOfRules+"' data-toggle='checkbox'>");
+                            var $button = $("<button type='button' class='btn btn-danger btn-xs' onclick="+ "deleteRule('"+ruleId+"')" +">Warning</button>");
+
+                            $($label).append($input);
+                            $($label).append(rule);                           
+                            //$($button).bind("click","deleteRule('"+ruleId+"')");  
+                            $($label).append($button);                            
+                            $($li).append($label);  
+                            $('.ruleList').append($li);
+
+                            */                                                    
+                            $('.ruleList').append(
+                                "<li id='"+ruleId+"'><label class='checkbox' for='checkbox"+numOfRules+"'><input type='checkbox' value='' id='checkbox"+numOfRules+"' data-toggle='checkbox'>"+rule+"<button type='button' class='btn btn-danger btn-xs' onclick="+ "deleteRule('"+ruleId+"')"+">Warning</button></label></li>"
+                            );
+                        }
+
+                        function deleteRule(rule) {
+                            var a = '#'+rule;
+                            $(a).remove();
+                        }
+                    </script>
                     <div class="form-row">
                         <h6>Rules</h6>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Add new role" name="betRoleAdd">                            
+                                    <input type="text" class="form-control" placeholder="Add new rule" id="betRuleAdd" name="betRoleAdd">                            
                                     <span class="input-group-btn">
-                                        <button type="submit" class="btn">
+                                        <button type="submit" class="btn" onclick="addRule($('#betRuleAdd').val());" >
                                             <span class="fui-check"></span>
                                         </button>
                                     </span>
                                 </div>
                             </div>
                             <ul class="ruleList">
-                                <li>
+                                <li id="ruleList1">
                                     <label class="checkbox" for="checkbox1">
                                         <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">
                                         Rule 1 some random text
+                                        <button type="button" class="btn btn-danger btn-xs" onclick="deleteRule('ruleList1');">Warning</button>
                                     </label>
-                                </li>
-                                <li>
-                                    <label class="checkbox" for="checkbox1">
-                                        <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">
-                                        Rule 1 some random text
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="checkbox" for="checkbox1">
-                                        <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">
-                                        Rule 1 some random text
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="checkbox" for="checkbox1">
-                                        <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">
-                                        Rule 1 some random text
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="checkbox" for="checkbox1">
-                                        <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">
-                                        Rule 1 some random text
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="checkbox" for="checkbox1">
-                                        <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox">
-                                        Rule 1 some random text
-                                    </label>
-                                </li>
+                                </li>                            
                             </ul>
                         </div>
                     </div>
