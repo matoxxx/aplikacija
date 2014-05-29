@@ -55,24 +55,13 @@ betAfriendControllers.controller('BrowseBetsController', ['$scope', '$http', '$f
 }]);
 
 /* CREATE BET CONTROLLER */
-<<<<<<< HEAD
 betAfriendControllers.controller('CreateBetController', ['$scope', '$firebase', '$http', function($scope, $firebase, $http) {
-=======
-betAfriendControllers.controller('CreateBetController', ['$scope', '$firebase', '$http', '$location', function($scope, $firebase, $http, $location) {
-    // $http.get('json/categories.json').success(function(data) {
-    //     $scope.categories = data;
-    // });
-    function openNewBet(){
-        if(!$rootScope.isLoggedIn)
-        {
-            $location.path('/');
-        }
-    }
 >>>>>>> origin/master
     var categoriesSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/categories/");  
     $scope.categories = $firebase(categoriesSource);
     var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/");
     $scope.bets= $firebase(betsSource);    // $scope.orderProp = 'age';
+
     $scope.rules = [{
                         description:"",
                         checked:false
@@ -153,6 +142,8 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$firebase', 
         alert("ja");
         betsSource.push({ name: $scope., id:5 });
     }*/
+
+}]);
 
 
 /* BET DETAIL CONTROLLER */
