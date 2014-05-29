@@ -60,8 +60,86 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$firebase', 
     $scope.categories = $firebase(categoriesSource);
     var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/");
     $scope.bets= $firebase(betsSource);    // $scope.orderProp = 'age';
+    $scope.rules = [{
+                        description:"",
+                        checked:false
+                    },
+                    {
+                        description:"",
+                        checked:false
+                    },
+                    {
+                        description:"",
+                        checked:false
+                    },
+                    {
+                        description:"",
+                        checked:false
+                    },
+                    {
+                        description:"",
+                        checked:false
+                    },
+                    {
+                        description:"",
+                        checked:false
+                    },
+                    {
+                        description:"",
+                        checked:false
+                    }];
+    $scope.newBet = {name:"",
+                     creationDate:"",
+                     dueDate:"",
+                     categories: {
+                        Sport:false,
+                        Family:false,
+                        'Free time':false,
+                        Gambling:false,
+                        Hobys:false,
+                        Fun:false,
+                        'Drinking games':false
+                     },
+                     betDetails: {
+                        betDescription:{
+                            description:"",
+                            rules:$scope.rules
+                        },
+                        betReward:"",
+                        betStatus:"In progress"
+                     },
+                     pageViews:0
+                 };
+    $scope.nameBet;
 
-}]);
+    var checkCategories = function() {
+        for (var i = 0; i < 7; i++) {
+            var kat = "#checkbox"+i;
+            var bool = $(kat).prop('checked');
+            var value = $(kat).val();
+            if (bool) {
+                $scope.newBet.categories[value] = true;
+            }
+        }
+    }
+ 
+    $scope.addBet = function() {
+        //alert("ja");
+        //alert($scope.newBet.name);
+        //$scope.newBet.name = new
+        console.log($scope.newBet);
+        checkCategories();
+        betsSource.push($scope.newBet);
+        $scope.newBet = '';
+        //alert($scope.rules[0].description);
+        //alert($scope.rules[1].description);
+    }
+ 
+}]);     
+    /*var addBet = function() {
+        alert("ja");
+        betsSource.push({ name: $scope., id:5 });
+    }*/
 
 
 /* BET DETAIL CONTROLLER */
@@ -117,7 +195,9 @@ betAfriendControllers.controller('UserDetailController', ['$scope', '$firebase',
 
 /* PROFILE CONTROLLER */
 betAfriendControllers.controller('ProfileController', ['$scope', '$routeParams', '$http', function($scope, $firebase, $routeParams, $http) {
-    
+    $http.get('json/users.json').success(function(data) {
+        $scope.users = data;
+    });
 }]);
 
 /* MY BETS CONTROLLER */
@@ -160,6 +240,14 @@ betAfriendControllers.controller('loginDialogController',['$scope', '$modal', fu
 // It is not the same as the $modal service used above.
 
 var ModalInstanceCtrl = function ($scope, $modalInstance, items) {
+
+    //TODO: Login using Facebook
+    //TODO: Login using Twitter
+    //TODO: Login using Google Plus
+    //TODO: Simple Login 
+    //TODO: Switch to Registration modal
+    //TODO: Switch to Login modal
+
     $scope.ok = function () {
         $modalInstance.close($scope.selected.item);
     };
@@ -206,90 +294,63 @@ var DatepickerDemoCtrl = function ($scope) {
   $scope.format = $scope.formats[0];
 };
 
-betAfriendControllers.controller('AuthController', ['$scope', '$rootScope','fireFactory', function($scope, $rootScope, fireFactory) {
-    $scope.usersRef = fireFactory.firebaseRef('users');
+betAfriendControllers.controller('AuthController', ['$scope', '$rootScope', '$firebaseAuth', function($scope, $rootScope, $firebaseAuth) {
+    var ref = new Firebase('https://dazzling-fire-5750.firebaseio.com/');
+    $rootScope.auth = $firebaseAuth(ref);
 
-    // FirebaseAuth callback
-    $scope.authCallback = function(error, user) {
-        if (error) {
-            console.log('error: ', error.code);
-            if(error.code != 'INVALID_USER')
-            {
-                $rootScope.isLoggedIn = false;
-            }
-            else
-            {
-                $rootScope.alert.class = 'danger';
-                $rootScope.alert.message = 'Invalid credentials!';               
-            }
+    $scope.signIn = function () {
+      $rootScope.auth.$login('password', {
+            email: $scope.email,
+            password: $scope.password
+      }).then(function(user) {
+            $rootScope.alert.class = 'success';
+            $rootScope.alert.message = 'Login successfully!';
+      }, function(error) {
+        if (error = 'INVALID_EMAIL') {
+            $rootScope.alert.class = 'danger';
+            $rootScope.alert.message = 'The username and password combination you entered is invalid.';
+            $scope.signUp();
+        } 
+        else if (error = 'INVALID_PASSWORD') {
+            $rootScope.alert.class = 'danger';
+            $rootScope.alert.message = 'The username and password combination you entered is invalid.';
+        } 
+        else {
+            $rootScope.alert.class = 'danger';
+            $rootScope.alert.message = 'The username and password combination you entered is invalid.';
         }
-        if (user) {
-            console.log('Logged In', user);
-
-            $rootScope.isLoggedIn = true;
-            $scope.userId = user.id;
-
-            // Set the userRef and add user child refs once
-            $scope.userRef = fireFactory.firebaseRef('users').child(user.id);
-            $scope.userRef.once('value', function(data) {
-                // Set the userRef children if this is first login
-                var timestamp = new Date();
-                var dd = timestamp.getDate();
-                var mm = timestamp.getMonth()+1;
-
-                var yyyy = timestamp.getFullYear();
-                if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} var timestamp = dd+'/'+mm+'/'+yyyy;
-
-                var val = data.val();
-                var info = {
-                    userId: user.id,
-                    name: user.username,
-                    displayName: user.displayName?user.displayName:'/',
-                    betsWon: 0,
-                    betsLost: 0,
-                    avatarIcon: user.thirdPartyUserData.profile_image_url?user.thirdPartyUserData.profile_image_url:'http://placehold.it/128/128',
-                    aboutUser: user.thirdPartyUserData.description?user.thirdPartyUserData.description:'/',
-                    lastLogin: timestamp,
-                    creationDate: timestamp,
-                    location: user.thirdPartyUserData.location?user.thirdPartyUserData.location:'/'
-                };
-
-                if (val) {
-                    info = val;
-                }
-
-                $scope.userRef.set(info); // set user child data once
-                $rootScope.currentUser = info;
-            });
-        }
+      });
     };
 
-    $scope.login = function(provider) {
-        var options = {
-            'rememberMe': true
-        };
-
-        if(provider === 'password')
-        {
-            var options = {
-                'rememberMe': true,
-                'email': $scope.email,
-                'password': $scope.password
-            };                
+    $scope.signUp = function() {
+      $rootScope.auth.$createUser($scope.email, $scope.password, function(error, user) {
+        if (!error) {
+            $rootScope.alert.class = 'success';
+            $rootScope.alert.message = 'Successfully created new account!';
+        } else {
+            $rootScope.alert.class = 'danger';
+            $rootScope.alert.message = 'The username and password combination you entered is invalid.';
         }
-        var auth = new FirebaseSimpleLogin(fireFactory.firebaseRef(), $scope.authCallback);
-        console.log("provider", provider);
-        auth.login(provider, options);
-        $rootScope.isLoggedIn = true;
+      });
     };
 
-    $scope.logout = function() {
-        $rootScope.isLoggedIn = false;
-        $rootScope.currentUser = null;
-        $rootScope.alert.class = 'success';
-        $rootScope.alert.message = 'Successfully logged out!';
+    $scope.loginTwitter = function() {
+        $rootScope.auth.$login('twitter');
     };
-}]);
+
+    $scope.loginGoogle = function() {
+        $rootScope.auth.$login('google');
+    };
+
+    $scope.loginFacebook = function() {
+        $rootScope.auth.$login('facebook');
+    };
+
+    function bindUser(provider) {
+
+    }
+  }
+]);
 
 betAfriendControllers.controller('AlertController', [
     '$scope', '$rootScope', function($scope, $rootScope) {

@@ -2,7 +2,7 @@
     <div class="container">
         <h3>Create new bet</h3>
 
-        <form id="createBet">
+        <form id="createBet" ng-controller="CreateBetController">
             <div class="row">
                 <div class="col-md-6">
                     <h6>Basic</h6>
@@ -10,43 +10,43 @@
                         <div class="form-row">
                             <label class="col-md-3 control-label" for="betName">Name</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control input-sm" name="betName" placeholder="Bet name" autofocus required></div>
+                                <input type="text" class="form-control input-sm" name="betName" placeholder="Bet name" ng-model="newBet.name" autofocus required></div>
                         </div>
                         <div class="form-row">
                             <label class="col-md-3 control-label" for="betDesc">Description</label>
                             <div class="col-md-9">
-                                <textarea type="text" class="form-control input-sm" name="betDesc" placeholder="Description"></textarea>
+                                <textarea type="text" class="form-control input-sm" name="betDesc" placeholder="Description"ng-model="newBet.betDetails.betDescription.description"></textarea>
                             </div>
                         </div>
                         <div class="form-row" id="categoriesSelect">
                             <label class="col-md-3 control-label" for="tagsinput">Categories</label>
                             <div class="col-md-9" ng-controller="CreateBetController">
                                     <label class="checkbox" for="checkbox{{cat.id}}" style="position:relative;float:left;margin-right:1em;" ng-repeat="cat in categories">
-                                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input value="" id="checkbox1{{cat.id}}" data-toggle="checkbox" type="checkbox">
+                                        <span class="icons"><span class="first-icon fui-checkbox-unchecked"></span><span class="second-icon fui-checkbox-checked"></span></span><input value="{{cat.name}}" id="checkbox{{cat.id}}" data-toggle="checkbox" type="checkbox">
                                         {{cat.name}}
                                     </label>
                             </div>
                         </div>
-                        <div class="form-row">
-                            <label class="col-md-3 control-label" for="betStartTime">Start time</label>
-                            <div class="col-md-9" ng-controller="DatepickerDemoCtrl">
-                                <div style="display:inline-block; min-height:200px;">
-                                    <datepicker ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker>
+                            <div class="form-row">
+                                <label class="col-md-3 control-label" for="betStartTime">Start time</label>
+                                <div class="col-md-9">
+                                    <div style="display:inline-block; min-height:200px;" ng-controller="DatepickerDemoCtrl">
+                                        <datepicker ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-row">
-                            <label class="col-md-3 control-label" for="betEndTime">End time</label>
-                            <div class="col-md-9" ng-controller="DatepickerDemoCtrl">
-                                <div style="display:inline-block; min-height:200px;">
-                                    <datepicker ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker>
+                            <div class="form-row">
+                                <label class="col-md-3 control-label" for="betEndTime">End time</label>
+                                <div class="col-md-9">
+                                    <div style="display:inline-block; min-height:200px;" ng-controller="DatepickerDemoCtrl">
+                                        <datepicker ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         <div class="form-row">
                             <label class="col-md-3 control-label" for="betReward">Reward</label>
                             <div class="col-md-9">
-                                <input type="text" name="betReward" class="form-control input-sm" placeholder="Reward" id="rewardid" required/>
+                                <input type="text" name="betReward" ng-model="newBet.betDetails.betReward"class="form-control input-sm" placeholder="Reward" id="rewardid" required/>
                             </div>
                         </div>
                     </div>
@@ -82,9 +82,6 @@
                             </div>
                         </div>
                     </div>
-                    <script type="text/javascript">
-
-                    </script>
                     <div class="form-row">
                         <h6>Rules</h6>
                         <div class="col-md-12">
@@ -106,7 +103,7 @@
             <hr>
             <div class="row">
                 <div class="form-row">
-                    <button class="btn btn-embossed btn-success" onclick="addBet();">Create</button>
+                    <button class="btn btn-embossed btn-success" ng-click="addBet();">Create</button>
                 </div>
             </div>
         </form>
