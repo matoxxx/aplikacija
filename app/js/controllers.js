@@ -55,23 +55,12 @@ betAfriendControllers.controller('BrowseBetsController', ['$scope', '$http', '$f
 }]);
 
 /* CREATE BET CONTROLLER */
-betAfriendControllers.controller('CreateBetController', ['$scope', '$firebase', '$http', '$location', function($scope, $firebase, $http, $location) {
-    // $http.get('json/categories.json').success(function(data) {
-    //     $scope.categories = data;
-    // });
-    function openNewBet(){
-        if(!$rootScope.isLoggedIn)
-        {
-            $location.path('/');
-        }
-    }
+betAfriendControllers.controller('CreateBetController', ['$scope', '$firebase', '$http', function($scope, $firebase, $http) {
     var categoriesSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/categories/");  
     $scope.categories = $firebase(categoriesSource);
     var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/");
     $scope.bets= $firebase(betsSource);    // $scope.orderProp = 'age';
-    /*var addBet = function() {
-        betsSource.push({ name: "Alex Wolfe", id:5 });
-    }); */
+
 }]);
 
 
