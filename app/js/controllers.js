@@ -63,9 +63,25 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$firebase', 
     $scope.categories = $firebase(categoriesSource);
     var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/");
     $scope.bets= $firebase(betsSource);    // $scope.orderProp = 'age';
+
+    var promise = angularFire(url, $scope, 'bets', []);
+    $scope.newBet = {};
+
+    promise.then(function() {
+      startWatch($scope);
+    });
+
+
+    function startWatch($scope) {  
+      $scope.add = function() {
+        console.log($scope.newBet);
+        $scope.bets.push($scope.newBet);
+        $scope.newBook = '';
+      }
+    }        
     /*var addBet = function() {
-        betsSource.push({ name: "Alex Wolfe", id:5 });
-    }); */
+        betsSource.push({ name: $scope., id:5 });
+    });*/
 }]);
 
 

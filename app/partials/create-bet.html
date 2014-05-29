@@ -2,7 +2,7 @@
     <div class="container">
         <h3>Create new bet</h3>
 
-        <form id="createBet">
+        <form id="createBet" ng-controller="CreateBetController">
             <div class="row">
                 <div class="col-md-6">
                     <h6>Basic</h6>
@@ -10,7 +10,7 @@
                         <div class="form-row">
                             <label class="col-md-3 control-label" for="betName">Name</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control input-sm" name="betName" placeholder="Bet name" autofocus required></div>
+                                <input type="text" class="form-control input-sm" name="betName" placeholder="Bet name" ng-model="newBet.name" autofocus required></div>
                         </div>
                         <div class="form-row">
                             <label class="col-md-3 control-label" for="betDesc">Description</label>
@@ -82,9 +82,6 @@
                             </div>
                         </div>
                     </div>
-                    <script type="text/javascript">
-
-                    </script>
                     <div class="form-row">
                         <h6>Rules</h6>
                         <div class="col-md-12">
@@ -113,7 +110,7 @@
             <hr>
             <div class="row">
                 <div class="form-row">
-                    <button class="btn btn-embossed btn-success" onclick="addBet();">Create</button>
+                    <button class="btn btn-embossed btn-success" ng-click="addBet();">Create</button>
                 </div>
             </div>
         </form>
