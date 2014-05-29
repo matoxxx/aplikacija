@@ -56,37 +56,90 @@ betAfriendControllers.controller('BrowseBetsController', ['$scope', '$http', '$f
 
 /* CREATE BET CONTROLLER */
 betAfriendControllers.controller('CreateBetController', ['$scope', '$firebase', '$http', function($scope, $firebase, $http) {
-    // $http.get('json/categories.json').success(function(data) {
-    //     $scope.categories = data;
-    // });
     var categoriesSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/categories/");  
     $scope.categories = $firebase(categoriesSource);
     var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/");
     $scope.bets= $firebase(betsSource);    // $scope.orderProp = 'age';
+    $scope.rules = [{
+                        description:"",
+                        checked:false
+                    },
+                    {
+                        description:"",
+                        checked:false
+                    },
+                    {
+                        description:"",
+                        checked:false
+                    },
+                    {
+                        description:"",
+                        checked:false
+                    },
+                    {
+                        description:"",
+                        checked:false
+                    },
+                    {
+                        description:"",
+                        checked:false
+                    },
+                    {
+                        description:"",
+                        checked:false
+                    }];
+    $scope.newBet = {name:"",
+                     creationDate:"",
+                     dueDate:"",
+                     categories: {
+                        Sport:false,
+                        Family:false,
+                        'Free time':false,
+                        Gambling:false,
+                        Hobys:false,
+                        Fun:false,
+                        'Drinking games':false
+                     },
+                     betDetails: {
+                        betDescription:{
+                            description:"",
+                            rules:$scope.rules
+                        },
+                        betReward:"",
+                        betStatus:"In progress"
+                     },
+                     pageViews:0
+                 };
+    $scope.nameBet;
 
-    function CreateBetController($scope, angularfire) {
-        alert("ne");
-        var promise = angularFire("https://dazzling-fire-5750.firebaseio.com/", $scope, 'bets', []);
-        $scope.newBet = {};
-
-        promise.then(function() {
-          startWatch($scope);
-        });
+    var checkCategories = function() {
+        for (var i = 0; i < 7; i++) {
+            var kat = "#checkbox"+i;
+            var bool = $(kat).prop('checked');
+            var value = $(kat).val();
+            if (bool) {
+                $scope.newBet.categories[value] = true;
+            }
+        }
     }
-}]);
-
-
-function startWatch($scope) {  
+ 
     $scope.addBet = function() {
-        alert("ja");
+        //alert("ja");
+        //alert($scope.newBet.name);
+        //$scope.newBet.name = new
         console.log($scope.newBet);
-        promise.push($scope.newBet);
+        checkCategories();
+        betsSource.push($scope.newBet);
         $scope.newBet = '';
+        //alert($scope.rules[0].description);
+        //alert($scope.rules[1].description);
     }
-}        
+ 
+}]);     
     /*var addBet = function() {
+        alert("ja");
         betsSource.push({ name: $scope., id:5 });
-    });*/
+    }*/
 
 
 /* BET DETAIL CONTROLLER */
