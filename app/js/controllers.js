@@ -56,40 +56,12 @@ betAfriendControllers.controller('BrowseBetsController', ['$scope', '$http', '$f
 
 /* CREATE BET CONTROLLER */
 betAfriendControllers.controller('CreateBetController', ['$scope', '$firebase', '$http', function($scope, $firebase, $http) {
->>>>>>> origin/master
     var categoriesSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/categories/");  
     $scope.categories = $firebase(categoriesSource);
     var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/");
     $scope.bets= $firebase(betsSource);    // $scope.orderProp = 'age';
 
-    $scope.rules = [{
-                        description:"",
-                        checked:false
-                    },
-                    {
-                        description:"",
-                        checked:false
-                    },
-                    {
-                        description:"",
-                        checked:false
-                    },
-                    {
-                        description:"",
-                        checked:false
-                    },
-                    {
-                        description:"",
-                        checked:false
-                    },
-                    {
-                        description:"",
-                        checked:false
-                    },
-                    {
-                        description:"",
-                        checked:false
-                    }];
+    $scope.rules = [];
     $scope.newBet = {name:"",
                      creationDate:"",
                      dueDate:"",
@@ -112,38 +84,53 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$firebase', 
                      },
                      pageViews:0
                  };
-    $scope.nameBet;
 
-    var checkCategories = function() {
+    //With jQuery we check which checkboxed are checked,
+    //and then we change newBet.categories['value'] of true ones
+    var checkCategories = function(clear) {
         for (var i = 0; i < 7; i++) {
-            var kat = "#checkbox"+i;
-            var bool = $(kat).prop('checked');
-            var value = $(kat).val();
-            if (bool) {
-                $scope.newBet.categories[value] = true;
+            if (!clear) {
+                var kat = "#checkbox"+i;
+                var bool = $(kat).prop('checked');
+                var value = $(kat).val();
+                if (bool) {
+                    $scope.newBet.categories[value] = true;
+                }
+            } else {
+                var kat = "#checkbox"+i;
+                var bool = $(kat).prop('checked',false);
             }
+
         }
     }
+
+    //We cound the number of elements in .ruleList (<ul>) and
+    //for each one we read value out of <input> and place it in array 
+    //$scope.rules which we then assign to newBet.betDetails.betDescription.rules
+    var addRules = function() {
+        var numOfRules = $('.ruleList li').length;
+        for (var i = 0; i < numOfRules; i++) {
+            var rule = "#checkboxRule"+i;
+            var value = $(rule).val();
+            var ruleObj = {description:value, checked:false};
+            $scope.rules[i] = ruleObj;
+        }
+    }    
  
     $scope.addBet = function() {
         //alert("ja");
         //alert($scope.newBet.name);
         //$scope.newBet.name = new
         console.log($scope.newBet);
-        checkCategories();
+        checkCategories(false);
+        addRules();
+        alert($scope.newBet.betDetails.betDescription.rules[0].description);
         betsSource.push($scope.newBet);
         $scope.newBet = '';
-        //alert($scope.rules[0].description);
-        //alert($scope.rules[1].description);
+        checkCategories(true);
     }
  
 }]);     
-    /*var addBet = function() {
-        alert("ja");
-        betsSource.push({ name: $scope., id:5 });
-    }*/
-
-}]);
 
 
 /* BET DETAIL CONTROLLER */
