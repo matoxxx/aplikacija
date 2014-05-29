@@ -7,6 +7,18 @@ var betAfriendApp = angular.module('betAfriendApp', [
   'firebase'
 ]);
 
+betAfriendApp.factory('fireFactory', [
+    function fireFactory() {
+        return {
+            firebaseRef: function(path) {
+                var baseUrl = 'https://dazzling-fire-5750.firebaseio.com';
+                var newpath = (path !== '') ?  baseUrl + '/' + path : baseUrl;
+                return new Firebase(newpath);
+            }
+        };
+    }
+]);
+
 betAfriendApp.config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
     $routeProvider.
@@ -20,7 +32,8 @@ betAfriendApp.config(['$routeProvider', '$locationProvider',
         }).
         when('/create', {
             templateUrl: '/partials/create-bet.html',
-            controller: 'CreateBetController'
+            controller: 'CreateBetController',
+            isLoggedIn: true
         }).
         when('/browse', {
             templateUrl: '/partials/browse-bets.html',

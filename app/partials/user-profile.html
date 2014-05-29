@@ -1,65 +1,65 @@
-<div class="jumbotron">
+<div class="jumbotron" ng-controller="ProfileController">
     <div class="container">
-        <h3>Profile of {{users[0].name}}</h3>
+        <h3>Profile of {{currentUser.name}}</h3>
             <div>
-                <span class="label label-default">Personal details</span>
+                <span class="lead">Personal details</span>
             </div>
             <div>
-                <img src="{{users[0].avatarIcon}}" class="img-responsive img-thumbnail img-user">
+                <img src="{{currentUser.avatarIcon}}" class="img-responsive img-thumbnail img-user">
             </div>
             <table class="table table-responsive table-user-details">
                 <tr>
                     <td>Username:</td>
-                    <td>{{users[0].displayName}}</td>
+                    <td>{{currentUser.displayName}}</td>
                 </tr>
                 <tr>
                     <td>E-mail:</td>
-                    <td>{{users[0].email}}</td>
+                    <td>{{currentUser.email}}</td>
                 </tr>            
                 <tr>
                     <td>Name:</td>
-                    <td>{{users[0].name}}</td>
+                    <td>{{currentUser.name}}</td>
                 </tr>
                 <tr>
                     <td>Location:</td>
-                    <td>{{users[0].location}}</td>
+                    <td>{{currentUser.location}}</td>
                 </tr> 
                 <tr>
                     <td>Birth date:</td>
-                    <td>{{users[0].birthDate}}</td>
+                    <td>{{currentUser.birthDate}}</td>
                 </tr>                   
                 <tr>
                     <td>About me:</td>
-                    <td>{{users[0].aboutUser}}</td>
+                    <td>{{currentUser.aboutUser}}</td>
                 </tr>                                                 
 
             </table>
     </div>
     <div class="container">
         <div>
-            <span class="label label-default">Personal statistic</span>
+            <span class="lead">Personal statistic</span>
         </div>
         <br>
            <table class="table table-responsive table-user-statistics">
             <tr>
                 <td>Creation date:</td>
-                <td>{{users[0].creationDate}}</td>
+                <td>{{currentUser.creationDate}}</td>
             </tr>
             <tr>
                 <td>Last login:</td>
-                <td>{{users[0].lastLogin}}</td>
+                <td>{{currentUser.lastLogin}}</td>
             </tr>            
             <tr>
                 <td>Last bet:</td>
-                <td>{{users[0].lastBet}}</td>
+                <td>{{currentUser.lastBet}}</td>
             </tr>
             <tr>
                 <td>Bets won:</td>
-                <td>{{users[0].betsWon}}</td>
+                <td>{{currentUser.betsWon}}</td>
             </tr>  
             <tr>
                 <td>Bets lost:</td>
-                <td>{{users[0].betsLost}}</td>
+                <td>{{currentUser.betsLost}}</td>
             </tr>   
         </table>        
     </div>
