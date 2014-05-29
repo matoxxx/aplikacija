@@ -37,9 +37,10 @@ function loadTagCategories(id) {
 
                             */                                                    
                                 $('.ruleList').append(
-                                    "<li id='"+ruleId+"'><label class='checkbox' for='checkbox"+numOfRules+"'><input type='checkbox' value='' id='checkbox"+numOfRules+"' data-toggle='checkbox'>"+rule+"<button type='button' class='btn btn-danger btn-xs' onclick="+ "deleteRule('"+ruleId+"')"+">Warning</button></label></li>"
+                                    "<li id='"+ruleId+"'><label class='checkbox' for='checkbox"+numOfRules+"'><input type='checkbox' value='' id='checkbox"+numOfRules+"' data-toggle='checkbox'>"+rule+"<button type='button' class='btn btn-danger btn-xs delete-rule' onclick="+ "deleteRule('"+ruleId+"')"+">X</button></label></li>"
                                 );
                             }
+                            $("#betRuleAdd").focus();
                         }
 
                         function deleteRule(rule) {

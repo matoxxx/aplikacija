@@ -1,6 +1,7 @@
 'use strict';
 
 /* Services */
+<<<<<<< HEAD
 
 angular.module('betAFriendApp.services.login', ['betAFriendApp.services.profileCreator'])
   .factory('loginService', ['angularFireAuth', 'profileCreator', '$location', '$rootScope',
@@ -48,3 +49,5 @@ angular.module('betAFriendApp.services.profileCreator', [])
       });
     }
   }]);
+=======
+>>>>>>> a247b65982132dc047c462c0f2e6870569b693c7

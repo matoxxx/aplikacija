@@ -236,6 +236,27 @@ footer {
 	}
 }
 
+/* CREATE BET */
+#createBet {
+	.ruleList {
+		.checkbox {
+			padding: 0;
+
+			.delete-rule {
+				display: none;
+				float: right;
+			}
+
+			&:hover {
+				.delete-rule {
+					display: inline-block;
+				}
+			}
+		}
+
+	}
+}
+
 /* MODAL DIALOG */
 .modal-content {
 	box-shadow: none;
@@ -245,6 +266,15 @@ footer {
 	.modal-body {
 		background: none;
 	}
+}
+
+/* NOTIFICATION ALERT */
+#notification {
+	z-index: 999999;
+	position: absolute;
+	top: 20px;
+	right: 50px;
+	font-size: 1em;
 }
 
 /* LOGIN DIALOG */
@@ -278,6 +308,11 @@ footer {
 			}
 		}
 	}
+}
+
+/* COMMENT BOX */
+#disqus_thread {
+	padding: 10px 40px;
 }
 
 /* MEDIA */

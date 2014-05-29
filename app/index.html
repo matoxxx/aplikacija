@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="betAfriendApp">
+<html lang="en" ng-app="betAfriendApp" ng-cloak>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
@@ -19,8 +19,9 @@
 	<script src="/angular/angular.js"></script>
 	<script src="/angular-route/angular-route.js"></script>
 	<script src='https://cdn.firebase.com/js/client/1.0.15/firebase.js'></script>
-    <script src='https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js'></script>
-    <script type='text/javascript' src='https://cdn.firebase.com/js/simple-login/1.4.1/firebase-simple-login.js'></script>
+	<script src="https://cdn.firebase.com/libs/angularfire/0.5.0/angularfire.min.js"></script> <!-- angularfire -->
+	<script src="https://cdn.firebase.com/v0/firebase-simple-login.js"></script> <!-- firebase-simple-login -->
+	<script type='text/javascript' src='https://cdn.firebase.com/js/simple-login/1.4.1/firebase-simple-login.js'></script>
 	<script src="js/app.js"></script>
 	<script src="js/main.js"></script>
 	<script src="js/controllers.js"></script>
@@ -28,7 +29,7 @@
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-		<div class="container" ng-controller="loginController">
+		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 					<span class="sr-only">Toggle navigation</span>
@@ -38,7 +39,7 @@
 				</button>
 				<a class="navbar-brand" href="/">Bet A Friend</a>
 			</div>
-			<div>
+			<div ng-controller="loginDialogController">
 				<ul class="nav navbar-nav navbar-left">
 					<li>
 						<a class="" href="/#!/create">Create</a>
@@ -62,16 +63,16 @@
 							</div>
 						</form>
 					</li> -->
-					<li id="userScore" ng-if="scope.user">
+					<li id="userScore" ng-show="auth.user">
 						<a href="#fakelink">
 							<span class="icon-star3"></span>
 							32
 						</a>
 					</li>
-					<li class="dropdown user-dropdown" ng-if="scope.user">
+					<li class="dropdown user-dropdown" ng-show="auth.user">
 						<a href="" class="dropdown-toggle" data-toggle="dropdown">
 							<span class="icon-user"></span>
-							Admin
+							{{auth.user.name}}
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu">
@@ -93,43 +94,44 @@
 								</a>
 							</li>
 							<li class="divider"></li>
-							<li>
-								<a href="#">
-									<i class="fa fa-power-off"></i>
-									Log Out
-								</a>
+							<li ng-show="auth.user">
+							    <a ng-click="auth.$logout()">
+							    	<i class="fa fa-power-off"></i>
+							    	Log Out
+							    </a>
 							</li>
 						</ul>
 					</li>
-					<li ng-if="!scope.user">
+					<li ng-show="!auth.user">
 					    <script type="text/ng-template" id="login-form.html">
 					        <div class="modal-body">
-					            <div class="login-form">
+					            <div class="login-form" ng-controller="AuthController">
 					            	<h4>Login</h4>
 					            	<form>
+					            		<fieldset ng-hide="auth.user">
 						            	<div class="form-group">
-						            		<input type="text" class="form-control login-field" value="" placeholder="Enter your name" id="login-name" required autofocus />					            
+						            		<input type="email" ng-model="email" class="form-control login-field" value="" placeholder="Enter your email" id="login-name" required autofocus />					            
 						            		<label class="login-field-icon fui-user" for="login-name"></label>
 						            	</div>
 
 						            	<div class="form-group">
-						            		<input type="password" class="form-control login-field" value="" placeholder="Password" id="login-pass"  required />					            
+						            		<input type="password" ng-model="password" class="form-control login-field" value="" placeholder="Password" id="login-pass"  required />					            
 						            		<label class="login-field-icon fui-lock" for="login-pass"></label>
 						            	</div>
 
-						            	<input type="submit" class="btn btn-primary btn-lg btn-block" href="#" value="Log in" />
-						            	<ul class="social-logins">
-						            		<li class="social-login-item login-link">Social login </li>
-						            		<li class="social-login-item"><button class="social-login-icon icon-facebook"></button></li>
-						            		<li class="social-login-item"><button class="social-login-icon icon-twitter"></button></li>
-						            		<li class="social-login-item"><button class="social-login-icon icon-googleplus"></button></li>    		
-						            	</ul>
-						            	<a class="login-link" href="#">Register</a>
+						            	<input type="submit" ng-click="signIn()" class="btn btn-primary btn-lg btn-block" href="#" value="Log in / Register" />
+						            	</fieldset>
 					            	</form>
+					            	<ul class="social-logins">
+					            		<li class="social-login-item login-link">Social login </li>
+					            		<li class="social-login-item"><button ng-click="loginFacebook();" class="social-login-icon icon-facebook"></button></li>
+					            		<li class="social-login-item"><button ng-click="loginTwitter();" class="social-login-icon icon-twitter"></button></li>
+					            		<li class="social-login-item"><button ng-click="loginGoogle();" class="social-login-icon icon-googleplus"></button></li>    		
+					            	</ul>					   
 					            </div>
 					        </div>
 					    </script>
-						<button id="loginBtn" ng-click="openLogin()">Login/Register</button>
+						<button id="loginBtn" ng-click="openLoginDialog()">Login/Register</button>
 					</li>
 				</ul>
 			</div>
@@ -141,6 +143,12 @@
 			<!--/.nav-collapse -->
 		</div>
 	</nav>
+<div class="container" ng-controller="AlertController">
+	<div class="alert alert-{{alert.class}} alert-dismissable" id="notification" ng-model="alert.message" ng-show="alert.message">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	  	{{alert.message}}
+	</div>
+</div>
 <div ng-view></div>
 	<footer>
 		<div class="container">

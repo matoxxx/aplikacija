@@ -3,7 +3,8 @@
 /* App Module */
 var betAfriendApp = angular.module('betAfriendApp', [
   'ngRoute',
-  'betAfriendControllers'
+  'betAfriendControllers',
+  'firebase'
 ]);
 
 betAfriendApp.config(['$routeProvider', '$locationProvider',

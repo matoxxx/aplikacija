@@ -63,28 +63,10 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$firebase', 
     $scope.categories = $firebase(categoriesSource);
     var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/");
     $scope.bets= $firebase(betsSource);    // $scope.orderProp = 'age';
-
-    function BetCtrl($scope, angularfire) {
-        var promise = angularFire("https://dazzling-fire-5750.firebaseio.com/", $scope, 'bets', []);
-        $scope.newBet = {};
-
-        promise.then(function() {
-          startWatch($scope);
-        });
-    }
-}]);
-
-
-function startWatch($scope) {  
-    $scope.addBet = function() {
-        console.log($scope.newBet);
-        promise.push($scope.newBet);
-        $scope.newBet = '';
-    }
-}        
     /*var addBet = function() {
-        betsSource.push({ name: $scope., id:5 });
-    });*/
+        betsSource.push({ name: "Alex Wolfe", id:5 });
+    }); */
+}]);
 
 
 /* BET DETAIL CONTROLLER */
@@ -202,43 +184,7 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, items) {
     };
 };
 
-var DatepickerDemoCtrl = function ($scope) {
-  $scope.today = function() {
-    $scope.dt = new Date();
-  };
-  $scope.today();
-
-  $scope.clear = function () {
-    $scope.dt = null;
-  };
-
-  // Disable weekend selection
-  $scope.disabled = function(date, mode) {
-    return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-  };
-
-  $scope.toggleMin = function() {
-    $scope.minDate = $scope.minDate ? null : new Date();
-  };
-  $scope.toggleMin();
-
-  $scope.open = function($event) {
-    $event.preventDefault();
-    $event.stopPropagation();
-
-    $scope.opened = true;
-  };
-
-  $scope.dateOptions = {
-    formatYear: 'yy',
-    startingDay: 1
-  };
-
-  $scope.initDate = new Date('2016-15-20');
-  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-  $scope.format = $scope.formats[0];
-};
-
+<<<<<<< HEAD
 betAfriendControllers.controller('AuthController', ['$scope', '$rootScope', '$firebaseAuth', function($scope, $rootScope, $firebaseAuth) {
     var ref = new Firebase('https://dazzling-fire-5750.firebaseio.com/');
     $rootScope.auth = $firebaseAuth(ref);
@@ -302,3 +248,41 @@ betAfriendControllers.controller('AlertController', [
         $rootScope.alert = {};
     }
 ]);
+=======
+var DatepickerDemoCtrl = function ($scope) {
+  $scope.today = function() {
+    $scope.dt = new Date();
+  };
+  $scope.today();
+
+  $scope.clear = function () {
+    $scope.dt = null;
+  };
+
+  // Disable weekend selection
+  $scope.disabled = function(date, mode) {
+    return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+  };
+
+  $scope.toggleMin = function() {
+    $scope.minDate = $scope.minDate ? null : new Date();
+  };
+  $scope.toggleMin();
+
+  $scope.open = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+
+    $scope.opened = true;
+  };
+
+  $scope.dateOptions = {
+    formatYear: 'yy',
+    startingDay: 1
+  };
+
+  $scope.initDate = new Date('2016-15-20');
+  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.format = $scope.formats[0];
+};
+>>>>>>> a247b65982132dc047c462c0f2e6870569b693c7
