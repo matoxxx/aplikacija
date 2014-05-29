@@ -64,25 +64,27 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$firebase', 
     var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/");
     $scope.bets= $firebase(betsSource);    // $scope.orderProp = 'age';
 
-    var promise = angularFire(url, $scope, 'bets', []);
-    $scope.newBet = {};
+    function BetCtrl($scope, angularfire) {
+        var promise = angularFire("https://dazzling-fire-5750.firebaseio.com/", $scope, 'bets', []);
+        $scope.newBet = {};
 
-    promise.then(function() {
-      startWatch($scope);
-    });
+        promise.then(function() {
+          startWatch($scope);
+        });
+    }
+}]);
 
 
-    function startWatch($scope) {  
-      $scope.add = function() {
+function startWatch($scope) {  
+    $scope.addBet = function() {
         console.log($scope.newBet);
-        $scope.bets.push($scope.newBet);
-        $scope.newBook = '';
-      }
-    }        
+        promise.push($scope.newBet);
+        $scope.newBet = '';
+    }
+}        
     /*var addBet = function() {
         betsSource.push({ name: $scope., id:5 });
     });*/
-}]);
 
 
 /* BET DETAIL CONTROLLER */
