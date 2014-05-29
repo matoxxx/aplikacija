@@ -24,7 +24,7 @@
 				<div class="col-md-3" id="lastsBets">
 					<h4>Last Bets</h4>
 					<div class="list-group">
-						<a href="#" class="list-group-item" ng-repeat="bet in bets">
+						<a href="#" class="list-group-item" ng-repeat="bet in bets | orderBy:'id':true">
 							<p class="list-group-item-heading">{{bet.name}}</p>
 							<p class="list-group-item-text">
 								<small>{{bet.creationDate}}</small>
@@ -53,8 +53,8 @@
 					<h4>Bets Per Category</h4>
 					<ul class="list-group">
 		 				<li class="list-group-item" ng-repeat="cat in categories">
-							<span class="badge">{{cat.id}}</span>
-							{{cat.name}}
+							<span class="badge">{{cat.name}}</span>
+							{{cat.id}}
 						</li>
 					</ul>
 					<hr>

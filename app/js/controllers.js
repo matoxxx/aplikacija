@@ -13,6 +13,36 @@ betAfriendControllers.controller('DashboardController', ['$scope', '$http', '$fi
     $scope.users = $firebase(usersSource);
     $scope.categories = $firebase(categoriesSource);
     $scope.orderProp = 'name';
+    /*var newList = [];
+    for (var i = 0; i < 5; i++) {
+        newList[i] = {id:i, name:"janez"};
+    }
+    $scope.neki = newList;
+    /*var catecs = $firebase(categoriesSource);
+    var catList = [];
+    var test = JSON.stringify(catecs);
+    /*for(var i = 0; i < catecs.length; i++) {
+
+        catList[i] = {
+                      catNum:0
+                     };
+        //console.log(catList[i]);
+    }*/
+   /* var n = test.length;
+    for(var i = 0; i < 10; i++) {
+        catList[i] = {catNum:test[0]};
+    }
+    $scope.cats = catList;
+
+    /*for(int i = 0; i < bets.length; i++) {
+        for(int j = 0; j < bet[i].categories.length; j++) {
+            for(int k = 0; k < catList.length; k++) {
+                if (bet[i].categories[j].categoryID == catList[k].catId) {
+                    catList[k].catNum++;
+                }
+            }
+        }
+    }*/
 }]);
 
 /* BROWSE BETS CONTROLLER */
@@ -29,6 +59,8 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$firebase', 
     // $http.get('json/categories.json').success(function(data) {
     //     $scope.categories = data;
     // });
+    var categoriesSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/categories/");  
+    $scope.categories = $firebase(categoriesSource);
 
     // $scope.orderProp = 'age';
 }]);
@@ -152,4 +184,41 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, items) {
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
+};
+
+var DatepickerDemoCtrl = function ($scope) {
+  $scope.today = function() {
+    $scope.dt = new Date();
+  };
+  $scope.today();
+
+  $scope.clear = function () {
+    $scope.dt = null;
+  };
+
+  // Disable weekend selection
+  $scope.disabled = function(date, mode) {
+    return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+  };
+
+  $scope.toggleMin = function() {
+    $scope.minDate = $scope.minDate ? null : new Date();
+  };
+  $scope.toggleMin();
+
+  $scope.open = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+
+    $scope.opened = true;
+  };
+
+  $scope.dateOptions = {
+    formatYear: 'yy',
+    startingDay: 1
+  };
+
+  $scope.initDate = new Date('2016-15-20');
+  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.format = $scope.formats[0];
 };
