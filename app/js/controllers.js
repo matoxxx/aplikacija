@@ -106,11 +106,9 @@ betAfriendControllers.controller('FriendsListController', ['$scope', '$routePara
 }]);
 
 /* LOGIN / REGISTER CONTROLLER */
-var loginController = function ($scope, $modal) {
+betAfriendControllers.controller('loginDialogController',['$scope', '$modal', function ($scope, $modal) {
 
-  $scope.items = ['item1', 'item2', 'item3'];
-
-  $scope.openLogin = function (size) {
+  $scope.openLoginDialog = function (size) {
 
     var modalInstance = $modal.open({
         templateUrl: 'login-form.html',
@@ -123,20 +121,16 @@ var loginController = function ($scope, $modal) {
         }
     });
 
-    modalInstance.result.then(function (selectedItem) {
-        $scope.selected = selectedItem;
+    modalInstance.result.then(function () {
+        $modal.close();
     });
   };
-};
+}]);
 
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
 
 var ModalInstanceCtrl = function ($scope, $modalInstance, items) {
-    $scope.items = items;
-    $scope.selected = {
-        item: $scope.items[0]
-    };
 
     //TODO: Login using Facebook
     //TODO: Login using Twitter
@@ -153,3 +147,67 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, items) {
         $modalInstance.dismiss('cancel');
     };
 };
+
+betAfriendControllers.controller('AuthController', ['$scope', '$rootScope', '$firebaseAuth', function($scope, $rootScope, $firebaseAuth) {
+    var ref = new Firebase('https://dazzling-fire-5750.firebaseio.com/');
+    $rootScope.auth = $firebaseAuth(ref);
+
+    $scope.signIn = function () {
+      $rootScope.auth.$login('password', {
+            email: $scope.email,
+            password: $scope.password
+      }).then(function(user) {
+            $rootScope.alert.class = 'success';
+            $rootScope.alert.message = 'Login successfully!';
+      }, function(error) {
+        if (error = 'INVALID_EMAIL') {
+            $rootScope.alert.class = 'danger';
+            $rootScope.alert.message = 'The username and password combination you entered is invalid.';
+            $scope.signUp();
+        } 
+        else if (error = 'INVALID_PASSWORD') {
+            $rootScope.alert.class = 'danger';
+            $rootScope.alert.message = 'The username and password combination you entered is invalid.';
+        } 
+        else {
+            $rootScope.alert.class = 'danger';
+            $rootScope.alert.message = 'The username and password combination you entered is invalid.';
+        }
+      });
+    };
+
+    $scope.signUp = function() {
+      $rootScope.auth.$createUser($scope.email, $scope.password, function(error, user) {
+        if (!error) {
+            $rootScope.alert.class = 'success';
+            $rootScope.alert.message = 'Successfully created new account!';
+        } else {
+            $rootScope.alert.class = 'danger';
+            $rootScope.alert.message = 'The username and password combination you entered is invalid.';
+        }
+      });
+    };
+
+    $scope.loginTwitter = function() {
+        $rootScope.auth.$login('twitter');
+    };
+
+    $scope.loginGoogle = function() {
+        $rootScope.auth.$login('google');
+    };
+
+    $scope.loginFacebook = function() {
+        $rootScope.auth.$login('facebook');
+    };
+
+    function bindUser(provider) {
+
+    }
+  }
+]);
+
+betAfriendControllers.controller('AlertController', [
+    '$scope', '$rootScope', function($scope, $rootScope) {
+        $rootScope.alert = {};
+    }
+]);
