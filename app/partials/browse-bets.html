@@ -31,7 +31,6 @@
                 <tr>
                     <th>Name</th>
                     <th>Description</th>
-                    <th>Author</th>
                     <th>Categories</th>
                     <th>Status</th>
                     <th>Reward</th>
@@ -41,14 +40,13 @@
             <tbody>
                 <tr ng-repeat="bet in bets | filter:searchText:false">
                     <td>{{bet.name}}</td>
-<!--                     <td>
+                    <td>
                         <div class="tooltip1" data-placement="top" title="{{bet.betDetails.betDescription.description}}">{{bet.betDetails.betDescription.description}}</div>
                     </td>
-                    <td>{{users[betsUsers[bet.id].betHolder.userID].name}}</td>
-                    <td>{{categories[bet.categories.categoryID].name}}</td>
+                    <td><label ng-repeat=""</td>
                     <td>{{bet.betDetails.betStatus.status}}</td>
                     <td>{{bet.betDetails.betReward}}</td>
-                    <td>{{bet.dueDate}}</td> -->
+                    <td>{{bet.dueDate}}</td> 
                 </tr>
             </tbody>
         </table>
