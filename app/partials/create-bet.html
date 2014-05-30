@@ -27,22 +27,18 @@
                                     </label>
                             </div>
                         </div>
-                            <div class="form-row">
-                                <label class="col-md-3 control-label" for="betStartTime">Start time</label>
-                                <div class="col-md-9">
-                                    <div style="display:inline-block; min-height:200px;" ng-controller="DatepickerDemoCtrl">
-                                        <datepicker ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker>
-                                    </div>
-                                </div>
+                        <div class="form-row">
+                            <label class="col-md-3 control-label" for="betStartTime">Start time</label>
+                            <div class="col-md-9">
+                                <input type="datetime-local" name="betStartTime" ng-model="newBet.creationDate" class="form-control input-sm" placeholder="Start date dd:mm:yy" required/>
                             </div>
-                            <div class="form-row">
-                                <label class="col-md-3 control-label" for="betEndTime">End time</label>
-                                <div class="col-md-9">
-                                    <div style="display:inline-block; min-height:200px;" ng-controller="DatepickerDemoCtrl">
-                                        <datepicker ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="form-row">
+                            <label class="col-md-3 control-label" for="betEndTime">End time</label>
+                            <div class="col-md-9">
+                                <input type="datetime-local" name="betEndTime" ng-model="newBet.dueDate" class="form-control input-sm" placeholder="End date dd:mm:yy" required/>
                             </div>
+                        </div>
                         <div class="form-row">
                             <label class="col-md-3 control-label" for="betReward">Reward</label>
                             <div class="col-md-9">
@@ -57,11 +53,11 @@
                         <div class="col-md-12">
                             <div class="col-md-5">
                                 <div class="betPlacer betHolders">
-                                    <img src="http://placehold.it/100x100" alt="...">
-                                    <p class="betPlacerName">Postavi Stavo</p>
-                                    <div href="#fakelink" class="betPoints">
+                                    <img src="{{currentUser.avatarIcon}}" alt="...">
+                                    <p class="betPlacerName">{{currentUser.displayName}}</p>
+                                    <div href="/#!/user/{{currentUser.id}}" class="betPoints">
                                         <span class="icon-star3"></span>
-                                        512
+                                        {{currentUser.betsWon}}
                                     </div>
                                 </div>
                             </div>
