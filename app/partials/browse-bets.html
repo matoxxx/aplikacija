@@ -29,7 +29,6 @@
         <table class="table table-responsive" ng-controller="BrowseBetsController">
             <thead>
                 <tr>
-                    <th>#</th>
                     <th>Name</th>
                     <th>Description</th>
                     <th>Author</th>
@@ -41,17 +40,15 @@
             </thead>
             <tbody>
                 <tr ng-repeat="bet in bets | filter:searchText:false">
-                    <td>{{bet.id}}</td>
                     <td>{{bet.name}}</td>
-                    <td>
-                        <div class="tooltip1" data-placement="top" title="{{bet.betDetails[0].betDescription[0].description}}">{{bet.betDetails[0].betDescription[0].description}}</div>
+<!--                     <td>
+                        <div class="tooltip1" data-placement="top" title="{{bet.betDetails.betDescription.description}}">{{bet.betDetails.betDescription.description}}</div>
                     </td>
-
-                    <td>{{users[betsUsers[bet.id].betHolder[0].userID].name}}</td>
-                    <td>{{categories[bet.categories[0].categoryID].name}}</td>
-                    <td>{{bet.betDetails[0].betStatus[0].status}}</td>
-                    <td>10€</td>
-                    <td>{{bet.dueDate}}</td>
+                    <td>{{users[betsUsers[bet.id].betHolder.userID].name}}</td>
+                    <td>{{categories[bet.categories.categoryID].name}}</td>
+                    <td>{{bet.betDetails.betStatus.status}}</td>
+                    <td>{{bet.betDetails.betReward}}</td>
+                    <td>{{bet.dueDate}}</td> -->
                 </tr>
             </tbody>
         </table>

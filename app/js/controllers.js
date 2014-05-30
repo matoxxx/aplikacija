@@ -46,12 +46,9 @@ betAfriendControllers.controller('DashboardController', ['$scope', '$http', '$fi
 }]);
 
 /* BROWSE BETS CONTROLLER */
-betAfriendControllers.controller('BrowseBetsController', ['$scope', '$http', '$firebase', function($scope, $http, $firebase) {
-    var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/");
-    var usersSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/users/");
-    $scope.bets = $firebase(betsSource);
-    $scope.users = $firebase(usersSource);
-    $scope.orderProp = 'age';
+betAfriendControllers.controller('BrowseBetsController', ['$scope', '$http', '$firebase', 'fireFactory', function($scope, $http, $firebase, fireFactory) {
+    $scope.bets = fireFactory.firebaseRef('bets');
+    $scope.users = fireFactory.firebaseRef('users');
 }]);
 
 /* CREATE BET CONTROLLER */
