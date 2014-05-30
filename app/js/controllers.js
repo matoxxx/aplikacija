@@ -4,6 +4,13 @@
 
 var betAfriendControllers = angular.module('betAfriendControllers', ["firebase", "ui.bootstrap"]);
 
+/* USER-PROFILE.HTML CONTROLLER */ 
+betAfriendControllers.controller('UserProfileController', ['$scope', '$rootScope', '$firebase', '$http', 'fireFactory', function($scope, $rootScope, $firebase, $http, fireFactory) { 
+    $scope.categories = fireFactory.firebaseRef('categories');
+    $scope.bets = fireFactory.firebaseRef('bets'); 
+    $scope.bets = fireFactory.firebaseRef('users'); 
+
+}]);
 /* DASHBOARD CONTROLLER */ 
 betAfriendControllers.controller('DashboardController', ['$scope', '$http', '$firebase', function($scope, $http, $firebase) {
     var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/");
@@ -55,12 +62,10 @@ betAfriendControllers.controller('BrowseBetsController', ['$scope', '$http', '$f
 }]);
 
 /* CREATE BET CONTROLLER */
-betAfriendControllers.controller('CreateBetController', ['$scope', '$firebase', '$http', function($scope, $firebase, $http) {
-    var categoriesSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/categories/");  
-    $scope.categories = $firebase(categoriesSource);
-    var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/");
-    $scope.bets= $firebase(betsSource);    // $scope.orderProp = 'age';
-    //$rootScope.currentUser
+betAfriendControllers.controller('CreateBetController', ['$scope', '$rootScope', '$firebase', '$http', 'fireFactory', function($scope, $rootScope, $firebase, $http, fireFactory) { 
+    $scope.categories = fireFactory.firebaseRef('categories');
+    $scope.bets = fireFactory.firebaseRef('bets');    // $scope.orderProp = 'age';
+    var betsSource = $scope.bets;
 
     $scope.rules = [];
     $scope.newBet = {name:"",
@@ -129,7 +134,10 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$firebase', 
         betsSource.push($scope.newBet);
         $scope.newBet = '';
         checkCategories(true);
-    }
+
+        $rootScope.alert.class = 'success';
+        $rootScope.alert.message = 'Successfully created bet!';
+    };
  
 }]);     
 
@@ -205,22 +213,17 @@ betAfriendControllers.controller('FriendsListController', ['$scope', '$routePara
 }]);
 
 /* LOGIN / REGISTER CONTROLLER */
-betAfriendControllers.controller('loginDialogController',['$scope', '$modal', function ($scope, $modal) {
+betAfriendControllers.controller('loginDialogController',['$scope', '$rootScope','$modal', function ($scope, $rootScope, $modal) {
 
   $scope.openLoginDialog = function (size) {
 
-    var modalInstance = $modal.open({
+    $rootScope.modalInstance = $modal.open({
         templateUrl: 'login-form.html',
         controller: ModalInstanceCtrl,
-        size: size,
-        resolve: {
-            items: function () {
-                return $scope.items;
-            }
-        }
+        size: size
     });
 
-    modalInstance.result.then(function () {
+    $rootScope.modalInstance.result.then(function () {
         $modal.close();
     });
   };
@@ -229,9 +232,9 @@ betAfriendControllers.controller('loginDialogController',['$scope', '$modal', fu
 // Please note that $modalInstance represents a modal window (instance) dependency.
 // It is not the same as the $modal service used above.
 
-var ModalInstanceCtrl = function ($scope, $modalInstance, items) {
+var ModalInstanceCtrl = function ($scope, $modalInstance) {
     $scope.ok = function () {
-        $modalInstance.close($scope.selected.item);
+        $modalInstance.close();
     };
 
     $scope.cancel = function () {
@@ -330,19 +333,20 @@ betAfriendControllers.controller('AuthController', ['$scope', '$rootScope','fire
 
                 $scope.userRef.set(info); // set user child data once
                 $rootScope.currentUser = info;
+                $rootScope.modalInstance.close();
             });
         }
     };
 
     $scope.login = function(provider) {
         var options = {
-            'rememberMe': true
+            'rememberMe': false
         };
 
         if(provider === 'password')
         {
             var options = {
-                'rememberMe': true,
+                'rememberMe': false,
                 'email': $scope.email,
                 'password': $scope.password
             };                
