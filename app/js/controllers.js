@@ -75,7 +75,7 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$rootScope',
     $scope.newBet = {name:"",
                      creationDate:"",
                      dueDate:"",
-                     categories: {
+                     /*categories: {
                         Sport:false,
                         Family:false,
                         'Free time':false,
@@ -83,7 +83,8 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$rootScope',
                         Hobys:false,
                         Fun:false,
                         'Drinking games':false
-                     },
+                     },*/
+                     categories:[],
                      betDetails: {
                         betDescription:{
                             description:"",
@@ -98,13 +99,17 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$rootScope',
     //With jQuery we check which checkboxed are checked,
     //and then we change newBet.categories['value'] of true ones
     var checkCategories = function(clear) {
+        var catCount = 0;
         for (var i = 0; i < 7; i++) {
             if (!clear) {
                 var kat = "#checkbox"+i;
                 var bool = $(kat).prop('checked');
                 var value = $(kat).val();
                 if (bool) {
-                    $scope.newBet.categories[value] = true;
+                    //$scope.newBet.categories[value] = true;
+                    $scope.newBet.categories[catCount] = value;
+                    alert($scope.newBet.categories[catCount]);
+                    catCount++;
                 }
             } else {
                 var kat = "#checkbox"+i;
