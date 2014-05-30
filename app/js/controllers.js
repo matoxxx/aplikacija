@@ -125,7 +125,7 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$firebase', 
         console.log($scope.newBet);
         checkCategories(false);
         addRules();
-        alert($scope.newBet.betDetails.betDescription.rules[0].description);
+        alert($('#datepickStart').val());
         betsSource.push($scope.newBet);
         $scope.newBet = '';
         checkCategories(true);
