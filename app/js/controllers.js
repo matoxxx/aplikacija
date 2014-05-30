@@ -19,7 +19,8 @@ betAfriendControllers.controller('DashboardController', ['$scope', '$http', '$fi
     $scope.bets = $firebase(betsSource);
     $scope.users = $firebase(usersSource);
     $scope.categories = $firebase(categoriesSource);
-    $scope.orderProp = 'name';
+    $scope.orderProp = 'id';
+    $scope.limitNum = 5;
     /*var newList = [];
     for (var i = 0; i < 5; i++) {
         newList[i] = {id:i, name:"janez"};
