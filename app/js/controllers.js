@@ -108,7 +108,6 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$rootScope',
                 if (bool) {
                     //$scope.newBet.categories[value] = true;
                     $scope.newBet.categories[catCount] = value;
-                    alert($scope.newBet.categories[catCount]);
                     catCount++;
                 }
             } else {
