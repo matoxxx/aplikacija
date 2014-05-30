@@ -56,17 +56,119 @@ betAfriendControllers.controller('BrowseBetsController', ['$scope', '$http', '$f
 
 /* CREATE BET CONTROLLER */
 betAfriendControllers.controller('CreateBetController', ['$scope', '$firebase', '$http', function($scope, $firebase, $http) {
-    // $http.get('json/categories.json').success(function(data) {
-    //     $scope.categories = data;
-    // });
     var categoriesSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/categories/");  
     $scope.categories = $firebase(categoriesSource);
     var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/");
     $scope.bets= $firebase(betsSource);    // $scope.orderProp = 'age';
+<<<<<<< HEAD
+    $scope.rules = [{
+                        description:"",
+                        checked:false
+                    },
+                    {
+                        description:"",
+                        checked:false
+                    },
+                    {
+                        description:"",
+                        checked:false
+                    },
+                    {
+                        description:"",
+                        checked:false
+                    },
+                    {
+                        description:"",
+                        checked:false
+                    },
+                    {
+                        description:"",
+                        checked:false
+                    },
+                    {
+                        description:"",
+                        checked:false
+                    }];
+=======
+
+    $scope.rules = [];
+>>>>>>> 0c7abc5e6bfe31da1c6337a4341a924d61478608
+    $scope.newBet = {name:"",
+                     creationDate:"",
+                     dueDate:"",
+                     categories: {
+                        Sport:false,
+                        Family:false,
+                        'Free time':false,
+                        Gambling:false,
+                        Hobys:false,
+                        Fun:false,
+                        'Drinking games':false
+                     },
+                     betDetails: {
+                        betDescription:{
+                            description:"",
+                            rules:$scope.rules
+                        },
+                        betReward:"",
+                        betStatus:"In progress"
+                     },
+                     pageViews:0
+                 };
+
+    //With jQuery we check which checkboxed are checked,
+    //and then we change newBet.categories['value'] of true ones
+    var checkCategories = function(clear) {
+        for (var i = 0; i < 7; i++) {
+            if (!clear) {
+                var kat = "#checkbox"+i;
+                var bool = $(kat).prop('checked');
+                var value = $(kat).val();
+                if (bool) {
+                    $scope.newBet.categories[value] = true;
+                }
+            } else {
+                var kat = "#checkbox"+i;
+                var bool = $(kat).prop('checked',false);
+            }
+
+        }
+    }
+
+    //We cound the number of elements in .ruleList (<ul>) and
+    //for each one we read value out of <input> and place it in array 
+    //$scope.rules which we then assign to newBet.betDetails.betDescription.rules
+    var addRules = function() {
+        var numOfRules = $('.ruleList li').length;
+        for (var i = 0; i < numOfRules; i++) {
+            var rule = "#checkboxRule"+i;
+            var value = $(rule).val();
+            var ruleObj = {description:value, checked:false};
+            $scope.rules[i] = ruleObj;
+        }
+    }    
+ 
+    $scope.addBet = function() {
+        //alert("ja");
+        //alert($scope.newBet.name);
+        //$scope.newBet.name = new
+        console.log($scope.newBet);
+        checkCategories(false);
+        addRules();
+        alert($scope.newBet.betDetails.betDescription.rules[0].description);
+        betsSource.push($scope.newBet);
+        $scope.newBet = '';
+        checkCategories(true);
+    }
+ 
+}]);     
+<<<<<<< HEAD
     /*var addBet = function() {
-        betsSource.push({ name: "Alex Wolfe", id:5 });
-    }); */
-}]);
+        alert("ja");
+        betsSource.push({ name: $scope., id:5 });
+    }*/
+=======
+>>>>>>> 0c7abc5e6bfe31da1c6337a4341a924d61478608
 
 
 /* BET DETAIL CONTROLLER */
@@ -184,7 +286,43 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, items) {
     };
 };
 
-<<<<<<< HEAD
+var DatepickerDemoCtrl = function ($scope) {
+  $scope.today = function() {
+    $scope.dt = new Date();
+  };
+  $scope.today();
+
+  $scope.clear = function () {
+    $scope.dt = null;
+  };
+
+  // Disable weekend selection
+  $scope.disabled = function(date, mode) {
+    return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+  };
+
+  $scope.toggleMin = function() {
+    $scope.minDate = $scope.minDate ? null : new Date();
+  };
+  $scope.toggleMin();
+
+  $scope.open = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+
+    $scope.opened = true;
+  };
+
+  $scope.dateOptions = {
+    formatYear: 'yy',
+    startingDay: 1
+  };
+
+  $scope.initDate = new Date('2016-15-20');
+  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.format = $scope.formats[0];
+};
+
 betAfriendControllers.controller('AuthController', ['$scope', '$rootScope', '$firebaseAuth', function($scope, $rootScope, $firebaseAuth) {
     var ref = new Firebase('https://dazzling-fire-5750.firebaseio.com/');
     $rootScope.auth = $firebaseAuth(ref);
@@ -248,41 +386,3 @@ betAfriendControllers.controller('AlertController', [
         $rootScope.alert = {};
     }
 ]);
-=======
-var DatepickerDemoCtrl = function ($scope) {
-  $scope.today = function() {
-    $scope.dt = new Date();
-  };
-  $scope.today();
-
-  $scope.clear = function () {
-    $scope.dt = null;
-  };
-
-  // Disable weekend selection
-  $scope.disabled = function(date, mode) {
-    return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-  };
-
-  $scope.toggleMin = function() {
-    $scope.minDate = $scope.minDate ? null : new Date();
-  };
-  $scope.toggleMin();
-
-  $scope.open = function($event) {
-    $event.preventDefault();
-    $event.stopPropagation();
-
-    $scope.opened = true;
-  };
-
-  $scope.dateOptions = {
-    formatYear: 'yy',
-    startingDay: 1
-  };
-
-  $scope.initDate = new Date('2016-15-20');
-  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-  $scope.format = $scope.formats[0];
-};
->>>>>>> a247b65982132dc047c462c0f2e6870569b693c7
