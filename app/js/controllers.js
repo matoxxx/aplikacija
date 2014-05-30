@@ -132,13 +132,14 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$rootScope',
     }    
  
     $scope.addBet = function() {
-        //alert("ja");
-        //alert($scope.newBet.name);
-        //$scope.newBet.name = new
-        console.log($scope.newBet);
         checkCategories(false);
         addRules();
         betsSource.push($scope.newBet);
+        var id = new Date().getTime() + Math.floor((Math.random() * 1024) + 1);
+        $scope.newBet.id = id; // put id into the data
+        betsSource.child(id).set($scope.newBet);
+
+        // betsSource.push($scope.newBet);
         $scope.newBet = '';
         checkCategories(true);
 
@@ -150,9 +151,8 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$rootScope',
 
 
 /* BET DETAIL CONTROLLER */
-betAfriendControllers.controller('BetDetailController', ['$scope', '$firebase', '$routeParams', '$http', '$log', function($scope, $firebase, $routeParams, $http, $log) {
-    var betSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/" + $routeParams.betId);
-    $scope.bet = $firebase(betSource);
+betAfriendControllers.controller('BetDetailController', ['$scope', '$firebase', '$routeParams', '$http', '$log', 'fireFactory', function($scope, $firebase, $routeParams, $http, $log, fireFactory) {
+    $scope.bet = fireFactory.firebaseRef("bets/" + $routeParams.betId);
 }]).directive('dirDisqus', function($window) {
     return {
         restrict: 'E',
@@ -303,7 +303,7 @@ betAfriendControllers.controller('AuthController', ['$scope', '$rootScope','fire
                 $rootScope.alert.message = 'Invalid credentials!';               
             }
         }
-        if (user) {
+        else if (user) {
             console.log('Logged In', user);
 
             $rootScope.isLoggedIn = true;

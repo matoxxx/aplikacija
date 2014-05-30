@@ -53,11 +53,11 @@
                         <div class="col-md-12">
                             <div class="col-md-5">
                                 <div class="betPlacer betHolders">
-                                    <img src="http://placehold.it/100x100" alt="...">
-                                    <p class="betPlacerName">Postavi Stavo</p>
-                                    <div href="#fakelink" class="betPoints">
+                                    <img src="{{currentUser.avatarIcon}}" alt="...">
+                                    <p class="betPlacerName">{{currentUser.displayName}}</p>
+                                    <div href="/#!/user/{{currentUser.id}}" class="betPoints">
                                         <span class="icon-star3"></span>
-                                        512
+                                        {{currentUser.betsWon}}
                                     </div>
                                 </div>
                             </div>
