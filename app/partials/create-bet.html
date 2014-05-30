@@ -52,14 +52,16 @@
                         <h6>Bet details</h6>
                         <div class="col-md-12">
                             <div class="col-md-5">
-                                <div class="betPlacer betHolders">
-                                    <img src="{{currentUser.avatarIcon}}" alt="...">
-                                    <p class="betPlacerName">{{currentUser.displayName}}</p>
-                                    <div href="/#!/user/{{currentUser.id}}" class="betPoints">
-                                        <span class="icon-star3"></span>
-                                        {{currentUser.betsWon}}
+                                <a href="/#!/user/{{currentUser.id}}">
+                                    <div class="betPlacer betHolders">
+                                        <img src="{{currentUser.avatarIcon}}" alt="...">
+                                        <p class="betPlacerName">{{currentUser.displayName}}</p>
+                                        <div class="betPoints">
+                                            <span class="icon-star3"></span>
+                                            {{currentUser.betsWon}}
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div class="col-md-2">
                                 <div class="betVs betHolders">

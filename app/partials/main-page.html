@@ -24,11 +24,12 @@
 				<div class="col-md-3" id="lastsBets">
 					<h4>Last Bets</h4>
 					<div class="list-group">
-						<a href="#" class="list-group-item" ng-repeat="bet in bets">
+						<a href="/#!/bet/{{bet.id}}" class="list-group-item" ng-repeat="bet in bets | filter:query | limitTo:limitNum | orderBy:orderProp">
 							<p class="list-group-item-heading">{{bet.name}}</p>
 							<p class="list-group-item-text">
 								<small>{{bet.creationDate}}</small>
-							</p>						</a>
+							</p>
+						</a>
 					</div>
 					<hr>
 <!-- 					<p>
@@ -38,7 +39,7 @@
 				<div class="col-md-3">
 					<h4>Most Popular</h4>
 					<div class="list-group">
-						<a href="#" class="list-group-item" ng-repeat="bet in bets">
+						<a href="/#!/bet/{{bet.id}}" class="list-group-item" ng-repeat="bet in bets">
 							<p class="list-group-item-heading">{{bet.name}}</p>
 							<p class="list-group-item-text">
 								<small>{{bet.creationDate}}</small>
