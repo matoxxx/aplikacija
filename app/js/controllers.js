@@ -60,6 +60,7 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$firebase', 
     $scope.categories = $firebase(categoriesSource);
     var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/");
     $scope.bets= $firebase(betsSource);    // $scope.orderProp = 'age';
+    //$rootScope.currentUser
 
     $scope.rules = [];
     $scope.newBet = {name:"",
