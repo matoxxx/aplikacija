@@ -12,13 +12,13 @@ betAfriendControllers.controller('UserProfileController', ['$scope', '$rootScope
 
 }]);
 /* DASHBOARD CONTROLLER */ 
-betAfriendControllers.controller('DashboardController', ['$scope', '$http', '$firebase', function($scope, $http, $firebase) {
-    var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/");
-    var usersSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/users/");    
-    var categoriesSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/categories/");  
-    $scope.bets = $firebase(betsSource);
-    $scope.users = $firebase(usersSource);
-    $scope.categories = $firebase(categoriesSource);
+betAfriendControllers.controller('DashboardController',  ['$scope', '$firebase', '$http', 'fireFactory', function($scope, $firebase, $http, fireFactory) {
+    //var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/");
+    /*var usersSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/users/");    
+    var categoriesSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/categories/");*/
+    $scope.bets = $firebase(fireFactory.firebaseRef("bets/"));
+    $scope.users = $firebase(fireFactory.firebaseRef("users/"));
+    $scope.categories = $firebase(fireFactory.firebaseRef("categories/"));
     $scope.orderProp = 'id';
     $scope.limitNum = 5;
     /*var newList = [];
@@ -153,7 +153,9 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$rootScope',
 
 /* BET DETAIL CONTROLLER */
 betAfriendControllers.controller('BetDetailController', ['$scope', '$firebase', '$routeParams', '$http', '$log', 'fireFactory', function($scope, $firebase, $routeParams, $http, $log, fireFactory) {
-    $scope.bet = fireFactory.firebaseRef("bets/" + $routeParams.betId);
+    //var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/" + $routeParams.betId);
+    //$scope.bet = $firebase(betsSource);
+    $scope.bet = $firebase(fireFactory.firebaseRef("bets/" + $routeParams.betId));
 }]).directive('dirDisqus', function($window) {
     return {
         restrict: 'E',
