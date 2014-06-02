@@ -55,22 +55,17 @@ betAfriendControllers.controller('DashboardController',  ['$scope', '$firebase',
 
 /* BROWSE BETS CONTROLLER */
 betAfriendControllers.controller('BrowseBetsController', ['$scope', '$http', '$firebase', 'fireFactory', function($scope, $http, $firebase, fireFactory) {
-    var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/");
-    var usersSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/users/");    
-    var categoriesSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/categories/");  
-    $scope.bets = $firebase(betsSource);
-    $scope.users = $firebase(usersSource);
-    $scope.categories = $firebase(categoriesSource);
+    $scope.bets = $firebase(fireFactory.firebaseRef("bets/"));
+    $scope.users = $firebase(fireFactory.firebaseRef("users/"));
+    $scope.categories = $firebase(fireFactory.firebaseRef("categories/"));
 }]);
 
 /* CREATE BET CONTROLLER */
 betAfriendControllers.controller('CreateBetController', ['$scope', '$rootScope', '$firebase', '$http', 'fireFactory', function($scope, $rootScope, $firebase, $http, fireFactory) { 
+    $scope.bets = $firebase(fireFactory.firebaseRef("bets/"));
+    $scope.users = $firebase(fireFactory.firebaseRef("users/"));
+    $scope.categories = $firebase(fireFactory.firebaseRef("categories/"));
     var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/");
-    var usersSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/users/");    
-    var categoriesSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/categories/");  
-    $scope.bets = $firebase(betsSource);
-    $scope.users = $firebase(usersSource);
-    $scope.categories = $firebase(categoriesSource);
 
     $scope.rules = [];
     $scope.newBet = {name:"",
@@ -135,7 +130,7 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$rootScope',
     $scope.addBet = function() {
         checkCategories(false);
         addRules();
-        betsSource.push($scope.newBet);
+        //betsSource.push($scope.newBet);
         var id = new Date().getTime() + Math.floor((Math.random() * 1024) + 1);
         $scope.newBet.id = id; // put id into the data
         betsSource.child(id).set($scope.newBet);
@@ -198,9 +193,11 @@ betAfriendControllers.controller('BetDetailController', ['$scope', '$firebase', 
 });
 
 /* USER DETAIL CONTROLLER */
-betAfriendControllers.controller('UserDetailController', ['$scope', '$firebase', '$routeParams', '$http', function($scope, $firebase, $routeParams, $http) {
-    var usersSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/users/" + $routeParams.userId);
-    $scope.user = $firebase(usersSource);
+betAfriendControllers.controller('UserDetailController', ['$scope', '$firebase', '$routeParams', '$http', 'fireFactory', function($scope, $firebase, $routeParams, $http, firefactory) {
+    //var usersSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/users/" + $routeParams.userId);
+
+    //NI SE TESTIRANO
+     $scope.user = $firebase(fireFactory.firebaseRef("users/" + $routeParams.userId));
 }]);
 
 /* PROFILE CONTROLLER */
@@ -289,8 +286,11 @@ var DatepickerDemoCtrl = function ($scope) {
   $scope.format = $scope.formats[0];
 };
 
-betAfriendControllers.controller('AuthController', ['$scope', '$rootScope','fireFactory', function($scope, $rootScope, fireFactory) {
-    $scope.usersRef = fireFactory.firebaseRef('users');
+betAfriendControllers.controller('AuthController', ['$scope', '$firebase', '$rootScope','fireFactory', function($scope, $firebase, $rootScope, fireFactory) {
+    //$scope.usersRef = fireFactory.firebaseRef('users');
+
+    //NI SE
+    $scope.usersRef = $firebase(fireFactory.firebaseRef("users/"));
 
     // FirebaseAuth callback
     $scope.authCallback = function(error, user) {
