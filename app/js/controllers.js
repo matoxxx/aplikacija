@@ -146,11 +146,11 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$rootScope',
         for (var i = 0; i < $scope.newBet.categories.length; i++) {
             var catID = $scope.newBet.categories[i].id;
             var categorySource = new Firebase("https://dazzling-fire-5750.firebaseio.com/categories/"+catID+"/bets");
-            var numOfBets = $scope.categories[catID].bets.length;
+            var numOfBets = $scope.categories[catID].count;
             console.log("Numofbets: "+numOfBets + " catID: "+catID);
             var betEntry = {};
             betEntry[numOfBets] = $scope.newBet.id;
-            categorySource.push(betEntry);
+            categorySource.update(betEntry);
         };
 
         // betsSource.push($scope.newBet);
@@ -211,10 +211,19 @@ betAfriendControllers.controller('BetDetailController', ['$scope', '$firebase', 
 });
 
 /* BET DETAIL CONTROLLER */
-betAfriendControllers.controller('CategoryDetailController', ['$scope', '$firebase', '$routeParams', '$http', '$log', 'fireFactory', function($scope, $firebase, $routeParams, $http, $log, fireFactory) {
+betAfriendControllers.controller('CategoryDetailController', ['$scope', '$firebase', '$routeParams', '$http', 'fireFactory', function($scope, $firebase, $routeParams, $http, fireFactory) {
     //var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/" + $routeParams.betId);
     //$scope.bet = $firebase(betsSource);
-    $scope.cat = $firebase(fireFactory.firebaseRef("categories/" + $routeParams.catId));
+    $scope.categories = $firebase(fireFactory.firebaseRef("categories/" + $routeParams.catId));
+    //$scope.bets = $firebase(fireFactory.firebaseRef("bets/"));
+    console.log($scope.categories[0]);
+    $scope.arr = [];
+    /*for (var i = 0; i < $scope.categories[2].count; i++) {
+        //$scope.arr.push($scope.bets[$scope.cat.bets[i]]);
+        console.log($scope.bets[$scope.cat.bets[i]]);
+    };
+    console.log($scope.arr.length+" "+$scope.categories[2].count);*/
+
 
 }]);
 

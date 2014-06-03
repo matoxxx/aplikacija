@@ -37,7 +37,7 @@
                 </tr>
             </thead>
             <tbody>
-                    <tr ng-repeat="bet in bets | filter:searchText:false">
+                    <tr ng-repeat="bet in arr | filter:searchText:false">
                     <td><a href="/#!/bet/{{bet.id}}">{{bet.name}}</a></td>
                     <td>
                         <div class="tooltip1" data-placement="top" title="{{bet.betDetails.betDescription.description}}">{{bet.betDetails.betDescription.description}}</div>
@@ -50,7 +50,7 @@
             </tbody>
         </table>              
     </div>  
-    <div id="disqus_thread">
+   <!-- <div id="disqus_thread">
         <div class="lead">Comments:</div>
         <dir-disqus disqus-shortname="BetAFriend"
                     disqus-identifier={{scope.Title}}
@@ -60,5 +60,5 @@
         </dir-disqus>
         <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
         <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
-    </div>
+    </div>-->
 </div>
