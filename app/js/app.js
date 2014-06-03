@@ -55,6 +55,10 @@ betAfriendApp.config(['$routeProvider', '$locationProvider',
             templateUrl: '/partials/bet-detail.html',
             controller: 'BetDetailController'
         }).
+        when('/category/:catId', {
+            templateUrl: '/partials/category-detail.html',
+            controller: 'CategoryDetailController'
+        }).        
         when('/friends', {
             templateUrl: '/partials/friends.html',
             controller: 'FriendListController'

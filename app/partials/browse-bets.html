@@ -38,12 +38,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="bet in bets | filter:searchText:false">
-                    <td>{{bet.name}}</td>
+                    <tr ng-repeat="bet in bets | filter:searchText:false">
+                    <td><a href="/#!/bet/{{bet.id}}">{{bet.name}}</a></td>
                     <td>
                         <div class="tooltip1" data-placement="top" title="{{bet.betDetails.betDescription.description}}">{{bet.betDetails.betDescription.description}}</div>
                     </td>
-                    <td><label class="label label-primary" ng-repeat="kat in bet.categories">{{kat}}</label></td>
+                 <td><a href="/#!/category/{{kat.id}}" ng-repeat="kat in bet.categories"><label class="label label-primary">{{kat.name}}</label></a></td>
                     <td>{{bet.betDetails.betStatus}}</td>
                     <td>{{bet.betDetails.betReward}}</td>
                     <td>{{bet.dueDate}}</td> 

@@ -103,7 +103,16 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$rootScope',
                 var value = $(kat).val();
                 if (bool) {
                     //$scope.newBet.categories[value] = true;
-                    $scope.newBet.categories[catCount] = value;
+                    var catObj = {id:i,name:value};
+                    $scope.newBet.categories[catCount] = catObj;
+                    var numCats = $scope.categories[i].count;
+                    var categoriesSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/categories/"+i);
+                    //console.log("CHEEEEEEEEEEEECK " +numCats);
+                    numCats++;
+                    //console.log("CHEEEEEEEEEEEECK " +numCats);
+                    $scope.categories[i].count = numCats;
+                    categoriesSource.update({count:numCats});
+                   // console.log("CHEEEEEEEEEEEECK " +$scope.categories[i].count);
                     catCount++;
                 }
             } else {
@@ -134,6 +143,15 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$rootScope',
         var id = new Date().getTime() + Math.floor((Math.random() * 1024) + 1);
         $scope.newBet.id = id; // put id into the data
         betsSource.child(id).set($scope.newBet);
+        for (var i = 0; i < $scope.newBet.categories.length; i++) {
+            var catID = $scope.newBet.categories[i].id;
+            var categorySource = new Firebase("https://dazzling-fire-5750.firebaseio.com/categories/"+catID+"/bets");
+            var numOfBets = $scope.categories[catID].bets.length;
+            console.log("Numofbets: "+numOfBets + " catID: "+catID);
+            var betEntry = {};
+            betEntry[numOfBets] = $scope.newBet.id;
+            categorySource.push(betEntry);
+        };
 
         // betsSource.push($scope.newBet);
         $scope.newBet = '';
@@ -191,6 +209,14 @@ betAfriendControllers.controller('BetDetailController', ['$scope', '$firebase', 
         }
     }
 });
+
+/* BET DETAIL CONTROLLER */
+betAfriendControllers.controller('CategoryDetailController', ['$scope', '$firebase', '$routeParams', '$http', '$log', 'fireFactory', function($scope, $firebase, $routeParams, $http, $log, fireFactory) {
+    //var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/" + $routeParams.betId);
+    //$scope.bet = $firebase(betsSource);
+    $scope.cat = $firebase(fireFactory.firebaseRef("categories/" + $routeParams.catId));
+
+}]);
 
 /* USER DETAIL CONTROLLER */
 betAfriendControllers.controller('UserDetailController', ['$scope', '$firebase', '$routeParams', '$http', 'fireFactory', function($scope, $firebase, $routeParams, $http, firefactory) {
