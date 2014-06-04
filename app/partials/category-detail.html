@@ -7,24 +7,25 @@
                         <div class="form-row">
                             <label class="col-md-3 control-label" for="betName">Name</label>
                             <div class="col-md-9">
-                                {{cat.name}}</div>
+                                {{category.name}}</div>
                         </div>
                         <div class="form-row">
                             <label class="col-md-3 control-label" for="betDesc">Description</label>
                             <div class="col-md-9">
-                                {{cat.description}}
+                                {{category.description}}
                             </div>
                         </div>
                         <div class="form-row">
                             <label class="col-md-3 control-label" for="betStartTime">Number of bets</label>
                             <div class="col-md-9">
-                                {{cat.count}}
+                                {{category.count}}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <hr>
+            <h4>Last bets</h4>
         <table class="table table-responsive" ng-controller="BrowseBetsController">
             <thead>
                 <tr>
@@ -37,15 +38,15 @@
                 </tr>
             </thead>
             <tbody>
-                    <tr ng-repeat="bet in arr | filter:searchText:false">
-                    <td><a href="/#!/bet/{{bet.id}}">{{bet.name}}</a></td>
+                    <tr ng-repeat="bet in category.bets | filter:searchText:false">
+                    <td><a href="/#!/bet/{{bet.id}}">{{bets[bet].name}}</a></td>
                     <td>
-                        <div class="tooltip1" data-placement="top" title="{{bet.betDetails.betDescription.description}}">{{bet.betDetails.betDescription.description}}</div>
+                        <div class="tooltip1" data-placement="top" title="{{bet.betDetails.betDescription.description}}">{{bets[bet].betDetails.betDescription.description}}</div>
                     </td>
                     <td><label class="label label-primary" ng-repeat="kat in bet.categories">{{kat.name}}</label></td>
-                    <td>{{bet.betDetails.betStatus}}</td>
-                    <td>{{bet.betDetails.betReward}}</td>
-                    <td>{{bet.dueDate}}</td> 
+                    <td>{{bets[bet].betDetails.betStatus}}</td>
+                    <td>{{bets[bet].betDetails.betReward}}</td>
+                    <td>{{bets[bet].dueDate}}</td> 
                 </tr>
             </tbody>
         </table>              
