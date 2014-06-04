@@ -67,12 +67,16 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$rootScope',
     $scope.bets = $firebase(fireFactory.firebaseRef("bets/"));
     $scope.users = $firebase(fireFactory.firebaseRef("users/"));
     $scope.categories = $firebase(fireFactory.firebaseRef("categories/"));
+    $scope.stats = $firebase(fireFactory.firebaseRef("stats/"));
     var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/");
+    var statsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/stats/");
     //console.log("nekiii: "+$scope.categories[0]);
 
     $scope.rules = [];
+    var timestamp = new Date().getTime();
     $scope.newBet = {name:"",
-                     creationDate:"",
+                     creationDate:timestamp,
+                     startDate:"",
                      dueDate:"",
                      /*categories: {
                         Sport:false,
@@ -100,28 +104,23 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$rootScope',
     var checkCategories = function(clear) {
         var catCount = 0;
         for (var i = 0; i < 7; i++) {
-            if (!clear) {
-                var kat = "#checkbox"+i;
-                var bool = $(kat).prop('checked');
-                var value = $(kat).val();
-                if (bool) {
-                    //$scope.newBet.categories[value] = true;
-                    var catObj = {id:i,name:value};
-                    $scope.newBet.categories[catCount] = catObj;
-                    var numCats = $scope.categories[i].count;
-                    var categoriesSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/categories/"+i);
-                    //console.log("CHEEEEEEEEEEEECK " +numCats);
-                    numCats++;
-                    //console.log("CHEEEEEEEEEEEECK " +numCats);
-                    $scope.categories[i].count = numCats;
-                    categoriesSource.update({count:numCats});
-                   // console.log("CHEEEEEEEEEEEECK " +$scope.categories[i].count);
-                    catCount++;
+            var kat = "#checkbox"+i;
+            var bool = $(kat).prop('checked');
+            var value = $(kat).val();
+            if (bool) {
+                //$scope.newBet.categories[value] = true;
+                var catObj = {id:i,name:value};
+                $scope.newBet.categories[catCount] = catObj;
+                var numCats = $scope.categories[i].count;
+                var categoriesSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/categories/"+i);
+                //console.log("CHEEEEEEEEEEEECK " +numCats);
+                numCats++;
+                //console.log("CHEEEEEEEEEEEECK " +numCats);
+                $scope.categories[i].count = numCats;
+                categoriesSource.update({count:numCats});
+                //console.log("CHEEEEEEEEEEEECK " +$scope.categories[i].count);
+                catCount++;
                 }
-            } else {
-                var kat = "#checkbox"+i;
-                var bool = $(kat).prop('checked',false);
-            }
 
         }
     }
@@ -146,6 +145,10 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$rootScope',
         var id = new Date().getTime() + Math.floor((Math.random() * 1024) + 1);
         $scope.newBet.id = id; // put id into the data
         betsSource.child(id).set($scope.newBet);
+        var numOfBetsAll = $scope.stats.numOfBets;
+        numOfBetsAll++;
+        var numOfBetsObj = {numOfBets:numOfBetsAll};
+        statsSource.update(numOfBetsObj);
         for (var i = 0; i < $scope.newBet.categories.length; i++) {
             var catID = $scope.newBet.categories[i].id;
             var categorySource = new Firebase("https://dazzling-fire-5750.firebaseio.com/categories/"+catID+"/bets");
@@ -155,10 +158,8 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$rootScope',
             betEntry[numOfBets] = $scope.newBet.id;
             categorySource.update(betEntry);
         };
-
-        // betsSource.push($scope.newBet);
-        $scope.newBet = '';
-        checkCategories(true);
+        var url = "/#!/bet/"+id;
+        window.location.href = url;
 
         $rootScope.alert.class = 'success';
         $rootScope.alert.message = 'Successfully created bet!';
