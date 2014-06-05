@@ -173,6 +173,58 @@ betAfriendControllers.controller('BetDetailController', ['$scope', '$firebase', 
     //var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/" + $routeParams.betId);
     //$scope.bet = $firebase(betsSource);
     $scope.bet = $firebase(fireFactory.firebaseRef("bets/" + $routeParams.betId));
+    $scope.makeEditable = function() {
+        var s = $('#editBetButton').text();
+        if (s === "Edit") {
+            swapEditable("Save",true);          
+        } else if (s === "Save") {
+            swapEditable("Edit",false);
+            
+            updateBet('#editReward',"/betDetails","betReward");
+            updateBet('#editName',"","name");
+            updateBet('#editDescription',"/betDetails/betDescription","description");
+            updateBet('#editEndTime',"","dueDate");
+            //updateBet('#editReward',"/betDetails","betReward");
+            //alert(purified);
+            /*var newObj = {betReward:purified};
+            betsSource.update(newObj);*/
+        }
+
+        //alert("dela");
+        //console.log("Nakj");
+    };
+
+    $scope.addNewRule = function() {
+        var numOfRules = $('.ruleList li').length;
+        var ruleId = "rule"+numOfRules;
+
+    };
+
+     var swapEditable = function(txt, bool) {
+            $('#editBetButton').text(txt);
+            $('#editName').attr('contenteditable',bool);
+            $('#editDescription').attr('contenteditable',bool);
+            $('#editEndTime').attr('contenteditable',bool);
+            $('#editReward').attr('contenteditable',bool);
+            $('.editRule').attr('contenteditable',bool);            
+     };
+
+     var updateBet = function(id,link,attribute) {
+        var text = $(id).text();
+        var arr = text.split(" ");
+        var finalText = "";
+        for (var i = 0; i < arr.length; i++) {
+            if(arr[i] != "" && arr[i] != "\n") {
+                finalText += (arr[i] + " ");
+            }
+        };
+        var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/" + $routeParams.betId + link);
+        var s = finalText.substring(0,finalText.length-1);
+        var newObj = {};
+        newObj[attribute] = s;
+        betsSource.update(newObj);
+     };
+
 }]).directive('dirDisqus', function($window) {
     return {
         restrict: 'E',

@@ -9,12 +9,12 @@
                     <div class="input-group">
                         <div class="form-row">
                             <label class="col-md-3 control-label" for="betName">Name</label>
-                            <div class="col-md-9" id="editName">
+                            <div class="col-md-9">
                                 {{bet.name}}</div>
                         </div>
                         <div class="form-row">
                             <label class="col-md-3 control-label" for="betDesc">Description</label>
-                            <div class="col-md-9" id="editDescription">
+                            <div class="col-md-9">
                                 {{bet.betDetails.betDescription.description}}
                             </div>
                         </div>
@@ -27,18 +27,18 @@
                         <div class="form-row">
                             <label class="col-md-3 control-label" for="betStartTime">Start time</label>
                             <div class="col-md-9">
-                                {{bet.startDate}}
+                                {{bet.creationDate}}
                             </div>
                         </div>
                         <div class="form-row">
                             <label class="col-md-3 control-label" for="betEndTime">End time</label>
-                            <div class="col-md-9"  id="editEndTime">
+                            <div class="col-md-9">
                                 {{bet.dueDate}}
                             </div>
                         </div>
                         <div class="form-row">
                             <label class="col-md-3 control-label" for="betReward">Reward</label>
-                            <div class="col-md-9" id="editReward">
+                            <div class="col-md-9">
                                 {{bet.betDetails.betReward}}
                             </div>
                         </div>
@@ -80,24 +80,16 @@
                         <div class="col-md-12">
                             <ul class="ruleList">
                                 <li ng-repeat="rule in bet.betDetails.betDescription.rules">
-                                    <label class="checkbox editRule">
-                                        <input type="checkbox" value="" data-toggle="checkbox" checked>
+                                    <label class="checkbox" for="checkbox1">
+                                        <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox" checked>
                                         {{rule.description}}
                                     </label>
                                 </li>
 
                             </ul>
                         </div>
-                    <div class="form-row">
-                        <button class="btn btn-embossed btn-success btn-group-xs" ng-click="addNewRule();">+</button>
-                    </div>                        
                     </div>
                 </div>
-            <div class="row">
-                <div class="form-row">
-                    <button class="btn btn-embossed btn-success" id="editBetButton" ng-click="makeEditable();">Edit</button>
-                </div>
-            </div>                
             </div>
             <hr>
             <div class="row" ng-if="bet.visibility"> 

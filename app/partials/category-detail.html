@@ -39,7 +39,7 @@
             </thead>
             <tbody>
                     <tr ng-repeat="bet in category.bets | filter:searchText:false">
-                    <td><a href="/#!/bet/{{bet.id}}">{{bets[bet].name}}</a></td>
+                    <td><a href="/#!/bet/{{bets[bet].id}}">{{bets[bet].name}}</a></td>
                     <td>
                         <div class="tooltip1" data-placement="top" title="{{bet.betDetails.betDescription.description}}">{{bets[bet].betDetails.betDescription.description}}</div>
                     </td>
