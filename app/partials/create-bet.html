@@ -30,13 +30,13 @@
                         <div class="form-row">
                             <label class="col-md-3 control-label" for="betStartTime">Start time</label>
                             <div class="col-md-9">
-                                <input type="datetime-local" name="betStartTime" ng-model="newBet.creationDate" class="form-control input-sm" placeholder="Start date dd:mm:yy" required/>
+                                <input type="datetime-local" name="betStartTime" ng-model="newBet.startDate" class="form-control input-sm" placeholder="Start date dd.mm.yyyy" required/>
                             </div>
                         </div>
                         <div class="form-row">
                             <label class="col-md-3 control-label" for="betEndTime">End time</label>
                             <div class="col-md-9">
-                                <input type="datetime-local" name="betEndTime" ng-model="newBet.dueDate" class="form-control input-sm" placeholder="End date dd:mm:yy" required/>
+                                <input type="datetime-local" name="betEndTime" ng-model="newBet.dueDate" class="form-control input-sm" placeholder="End date dd.mm.yyyy" required/>
                             </div>
                         </div>
                         <div class="form-row">
@@ -87,7 +87,7 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Add new rule" id="betRuleAdd" name="betRoleAdd">                            
                                     <span class="input-group-btn">
-                                        <button type="submit" class="btn" onclick="addRule($('#betRuleAdd').val());$('#betRuleAdd').val('');" >
+                                        <button type="submit" class="btn" ng-click="addRule();" >
                                             <span class="fui-check"></span>
                                         </button>
                                     </span>

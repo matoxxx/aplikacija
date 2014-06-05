@@ -1,0 +1,65 @@
+<div class="jumbotron" ng-controller="CategoryDetailController">
+    <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h6>Basic</h6>
+                    <div class="input-group">
+                        <div class="form-row">
+                            <label class="col-md-3 control-label" for="betName">Name</label>
+                            <div class="col-md-9">
+                                {{category.name}}</div>
+                        </div>
+                        <div class="form-row">
+                            <label class="col-md-3 control-label" for="betDesc">Description</label>
+                            <div class="col-md-9">
+                                {{category.description}}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <label class="col-md-3 control-label" for="betStartTime">Number of bets</label>
+                            <div class="col-md-9">
+                                {{category.count}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <h4>Last bets</h4>
+        <table class="table table-responsive" ng-controller="BrowseBetsController">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Categories</th>
+                    <th>Status</th>
+                    <th>Reward</th>
+                    <th>End date</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr ng-repeat="bet in category.bets | filter:searchText:false">
+                    <td><a href="/#!/bet/{{bets[bet].id}}">{{bets[bet].name}}</a></td>
+                    <td>
+                        <div class="tooltip1" data-placement="top" title="{{bet.betDetails.betDescription.description}}">{{bets[bet].betDetails.betDescription.description}}</div>
+                    </td>
+                    <td><label class="label label-primary" ng-repeat="kat in bet.categories">{{kat.name}}</label></td>
+                    <td>{{bets[bet].betDetails.betStatus}}</td>
+                    <td>{{bets[bet].betDetails.betReward}}</td>
+                    <td>{{bets[bet].dueDate}}</td> 
+                </tr>
+            </tbody>
+        </table>              
+    </div>  
+   <!-- <div id="disqus_thread">
+        <div class="lead">Comments:</div>
+        <dir-disqus disqus-shortname="BetAFriend"
+                    disqus-identifier={{scope.Title}}
+                    disqus-title={{scope.Title}}
+                    disqus-url={{scope.url}} /* I set window.location.href in my controller to pass the url*/
+                    readytobind="true">
+        </dir-disqus>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>-->
+</div>

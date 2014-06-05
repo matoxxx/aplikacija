@@ -53,10 +53,12 @@
 				<div class="col-md-3">
 					<h4>Bets Per Category</h4>
 					<ul class="list-group">
-		 				<li class="list-group-item" ng-repeat="cat in categories">
-							<span class="badge">{{cat.name}}</span>
-							{{cat.id}}
+						<a href="/#!/category/{{cat.id}}" class="list-group-item" ng-repeat="cat in categories">
+		 				<li class="list-group-item">
+							<span class="badge">{{cat.count}}</span>
+							{{cat.name}}
 						</li>
+					</a>
 					</ul>
 					<hr>
 <!-- 					<p>
@@ -68,11 +70,11 @@
 					<ul class="list-group">
 						<li class="list-group-item">
 							Bets
-							<span class="badge">650</span>
+							<span class="badge">{{stats.numOfBets}}</span>
 						</li>
 						<li class="list-group-item">
 							Users
-							<span class="badge">410</span>
+							<span class="badge">{{stats.numOfUsers}}</span>
 						</li>
 						<li class="list-group-item">
 							Friends/User
@@ -80,7 +82,7 @@
 						</li>
 						<li class="list-group-item">
 							Categories
-							<span class="badge">21</span>
+							<span class="badge">{{stats.numOfCategories}}</span>
 						</li>
 					</ul>
 					<hr>
