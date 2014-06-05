@@ -153,7 +153,9 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$rootScope',
 
 /* BET DETAIL CONTROLLER */
 betAfriendControllers.controller('BetDetailController', ['$scope', '$firebase', '$routeParams', '$http', '$log', 'fireFactory', function($scope, $firebase, $routeParams, $http, $log, fireFactory) {
-    $scope.bet = fireFactory.firebaseRef("bets/" + $routeParams.betId);
+    // $scope.bet = fireFactory.firebaseRef("bets/" + $routeParams.betId);
+    var categoriesSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/" + $routeParams.betId);  
+    $scope.bets = $firebase(categoriesSource);
 }]).directive('dirDisqus', function($window) {
     return {
         restrict: 'E',
@@ -287,91 +289,63 @@ var DatepickerDemoCtrl = function ($scope) {
   $scope.format = $scope.formats[0];
 };
 
-betAfriendControllers.controller('AuthController', ['$scope', '$rootScope','fireFactory', function($scope, $rootScope, fireFactory) {
-    $scope.usersRef = fireFactory.firebaseRef('users');
+betAfriendControllers.controller('AuthController', ["$scope", "$firebase", "$firebaseSimpleLogin",
+        function($scope, $firebase, $firebaseSimpleLogin) 
+        {
+            var ref = new Firebase("https://dazzling-fire-5750.firebaseio.com/");
+            $scope.auth = $firebaseSimpleLogin(ref);
 
-    // FirebaseAuth callback
-    $scope.authCallback = function(error, user) {
-        if (error) {
-            console.log('error: ', error.code);
-            if(error.code != 'INVALID_USER')
-            {
-                $rootScope.isLoggedIn = false;
-            }
-            else
-            {
-                $rootScope.alert.class = 'danger';
-                $rootScope.alert.message = 'Invalid credentials!';               
-            }
-        }
-        else if (user) {
-            console.log('Logged In', user);
+            var auth = new FirebaseSimpleLogin(ref, function(error, user) {
+                if (error) {
+                    // an error occurred while attempting login
+                    console.log(error);
+                } 
+                else if (user) {
+                    // user authenticated with Firebase
 
-            $rootScope.isLoggedIn = true;
-            $scope.userId = user.id;
+                    var currentPath = window.location.pathname.split('/').pop();
 
-            // Set the userRef and add user child refs once
-            $scope.userRef = fireFactory.firebaseRef('users').child(user.id);
-            $scope.userRef.once('value', function(data) {
-                // Set the userRef children if this is first login
-                var timestamp = new Date();
-                var dd = timestamp.getDate();
-                var mm = timestamp.getMonth()+1;
+                    if (currentPath === 'sign-in.html' || currentPath === 'register.html') {
+                        // create a user reference
+                        var userRef = ref.child('users/' + user.uid);
 
-                var yyyy = timestamp.getFullYear();
-                if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} var timestamp = dd+'/'+mm+'/'+yyyy;
+                        // check wheather the user is already registered
+                        userRef.on('value', function(snapshot) {
+                            if(snapshot.val() === null) {
+                                // the user hasn't joined yet
 
-                var val = data.val();
-                var info = {
-                    userId: user.id,
-                    name: user.username,
-                    displayName: user.displayName?user.displayName:'/',
-                    betsWon: 0,
-                    betsLost: 0,
-                    avatarIcon: user.thirdPartyUserData.profile_image_url?user.thirdPartyUserData.profile_image_url:'http://placehold.it/128/128',
-                    aboutUser: user.thirdPartyUserData.description?user.thirdPartyUserData.description:'/',
-                    lastLogin: timestamp,
-                    creationDate: timestamp,
-                    location: user.thirdPartyUserData.location?user.thirdPartyUserData.location:'/'
-                };
+                                // get current date
+                                var date = new Date();
+                                var dd = date.getDate();
+                                var mm = date.getMonth()+1; // january is 0!
+                                var yyyy = date.getFullYear();
 
-                if (val) {
-                    info = val;
+                                if(dd < 10) {
+                                    dd = '0' + dd;
+                                } 
+
+                                if(mm < 10) {
+                                    mm= '0' + mm;
+                                } 
+
+                                date = dd+'/'+mm+'/'+yyyy;
+
+                                // write new user name and joined date to database
+                                userRef.child('name').set(user.displayName);
+                                userRef.child('joined').set(date);
+                            } else {
+                                // the user is already registered
+                            }
+                            // redirect to main page
+                            window.location.href = "index.html";
+                        });
+                    }
+                } else {
+                    // user is logged out
                 }
-
-                $scope.userRef.set(info); // set user child data once
-                $rootScope.currentUser = info;
-                $rootScope.modalInstance.close();
             });
         }
-    };
-
-    $scope.login = function(provider) {
-        var options = {
-            'rememberMe': false
-        };
-
-        if(provider === 'password')
-        {
-            var options = {
-                'rememberMe': false,
-                'email': $scope.email,
-                'password': $scope.password
-            };                
-        }
-        var auth = new FirebaseSimpleLogin(fireFactory.firebaseRef(), $scope.authCallback);
-        console.log("provider", provider);
-        auth.login(provider, options);
-        $rootScope.isLoggedIn = true;
-    };
-
-    $scope.logout = function() {
-        $rootScope.isLoggedIn = false;
-        $rootScope.currentUser = null;
-        $rootScope.alert.class = 'success';
-        $rootScope.alert.message = 'Successfully logged out!';
-    };
-}]);
+    ]);
 
 betAfriendControllers.controller('AlertController', [
     '$scope', '$rootScope', function($scope, $rootScope) {
