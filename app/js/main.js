@@ -17,7 +17,8 @@ function loadTagCategories(id) {
                             }
                         });*/
 
-                        function addRule(rule) {
+                        /*function addRule() {
+                            var rule = $('#betRuleAdd').val();
                             var numOfRules = $('.ruleList li').length;
                             var ruleId = "rule"+numOfRules;
                             if (rule != "") {
@@ -36,13 +37,14 @@ function loadTagCategories(id) {
                             $('.ruleList').append($li);
 
                             */                                                    
-                                $('.ruleList').append(
-                                    "<li id='"+ruleId+"'><label class='checkbox' for='checkbox"+numOfRules+"'><input type='checkbox' value='"+rule+"' id='checkboxRule"+numOfRules+"' data-toggle='checkbox'>"+rule+"<button type='button' class='btn btn-danger btn-xs delete-rule' onclick="+ "deleteRule('"+ruleId+"')"+">X</button></label></li>"
+                                /*$('.ruleList').append(
+                                    "<li ng-repeat='rule in bet.betDetails.betDescription.rules'><label class='checkbox' for='checkbox"+numOfRules+"'><input type='checkbox' value='"+rule+"' id='checkboxRule"+numOfRules+"' data-toggle='checkbox'>"+rule+"<button type='button' class='btn btn-danger btn-xs delete-rule' onclick="+ "deleteRule('"+ruleId+"')"+">X</button></label></li>"
 //verzija z input fieldom notri   "<li id='"+ruleId+"'><label class='checkbox' for='checkbox"+numOfRules+"'><input type='checkbox' value='' id='checkbox"+numOfRules+"' data-toggle='checkbox'>"+rule+"<button type='button' class='btn btn-danger btn-xs delete-rule' onclick="+ "deleteRule('"+ruleId+"')"+">X</button><input type='text' value='"+rule+"' ng-model='rules["+numOfRules+"].description'>"+rule+"</input></label></li>"                                    
                                 );
                             }
+                            $('#betRuleAdd').val('');
                             $("#betRuleAdd").focus();
-                        }
+                        }*/
 
                         function deleteRule(rule) {
                             var a = '#'+rule;

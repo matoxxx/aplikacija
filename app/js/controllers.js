@@ -101,7 +101,7 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$rootScope',
 
     //With jQuery we check which checkboxed are checked,
     //and then we change newBet.categories['value'] of true ones
-    var checkCategories = function(clear) {
+    var checkCategories = function() {
         var catCount = 0;
         for (var i = 0; i < 7; i++) {
             var kat = "#checkbox"+i;
@@ -124,6 +124,24 @@ betAfriendControllers.controller('CreateBetController', ['$scope', '$rootScope',
 
         }
     }
+
+    $scope.addRule = function() {
+        var rule = $('#betRuleAdd').val();
+        var numOfRules = $('.ruleList li').length;
+        var ruleId = "rule"+numOfRules;
+        if (rule != "") {                                  
+            $('.ruleList').append("<li id='"+ruleId+"'ng-repeat='rule in bet.betDetails.betDescription.rules'><label class='checkbox' for='checkbox"+numOfRules+"'><input type='checkbox' value='"+rule+"' id='checkboxRule"+numOfRules+"' data-toggle='checkbox'>"+rule+"<button type='button' class='btn btn-danger btn-xs delete-rule' onclick="+ "deleteRule('"+ruleId+"')"+">X</button></label></li>");
+        }
+        $('#betRuleAdd').val('');
+        $("#betRuleAdd").focus();
+    };
+
+                        //I couldn't implement deleteRule for ng-click, so it is still in main.js
+                       /* $scope.deleteRule = function(rule) {
+                            alert(rule);
+                            var a = '#'+rule;
+                            $(a).remove();
+                        }   */                        
 
     //We cound the number of elements in .ruleList (<ul>) and
     //for each one we read value out of <input> and place it in array 
@@ -173,10 +191,13 @@ betAfriendControllers.controller('BetDetailController', ['$scope', '$firebase', 
     //var betsSource = new Firebase("https://dazzling-fire-5750.firebaseio.com/bets/" + $routeParams.betId);
     //$scope.bet = $firebase(betsSource);
     $scope.bet = $firebase(fireFactory.firebaseRef("bets/" + $routeParams.betId));
+
+    //We make the fields editable and we update the firebase when hitting Save
     $scope.makeEditable = function() {
         var s = $('#editBetButton').text();
         if (s === "Edit") {
-            swapEditable("Save",true);          
+            swapEditable("Save",true); 
+            rulesEditable();         
         } else if (s === "Save") {
             swapEditable("Edit",false);
             
@@ -197,8 +218,23 @@ betAfriendControllers.controller('BetDetailController', ['$scope', '$firebase', 
     $scope.addNewRule = function() {
         var numOfRules = $('.ruleList li').length;
         var ruleId = "rule"+numOfRules;
+        alert("dela");
+        $('.ruleList').append("<li id='"+ruleId+"'><label class='checkbox editRule'><input type='checkbox' id='checkboxRule"+numOfRules+"' data-toggle='checkbox'>Enter rule<button type='button' class='btn btn-danger btn-xs delete-rule' onclick="+ "deleteRule('"+ruleId+"')"+">X</button></label></li>");        
 
     };
+
+    var rulesEditable = function() {
+        var numOfRules = $('.ruleList li').length;
+        for (var i = 0; i < numOfRules; i++) {
+            var ruleId = "rule"+i;
+            var tag = "<button type='button' class='btn btn-danger btn-xs delete-rule' onclick="+ "deleteRule('"+ruleId+"');"+">X</button>";
+            var id = "#"+ruleId;
+            //$(id).append(tag);
+
+            //treba je še appendati tag!!!!!!!!!!!!!!
+            alert(tag);
+        }; 
+    }
 
      var swapEditable = function(txt, bool) {
             $('#editBetButton').text(txt);
